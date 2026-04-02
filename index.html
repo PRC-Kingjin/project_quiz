@@ -326,6 +326,58 @@
       justify-content: space-between;
       gap: 14px;
       flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .quiz-nav {
+      position: sticky;
+      top: calc(var(--safe-top) + 6px);
+      z-index: 8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: -4px 0 10px;
+      padding: 10px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 22px rgba(115, 109, 133, 0.14);
+      backdrop-filter: blur(16px);
+    }
+
+    .quiz-nav-home {
+      min-height: 54px;
+      min-width: 140px;
+      padding: 0 18px;
+      font-size: 18px;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      box-shadow: 0 14px 24px rgba(239,111,71,0.2);
+    }
+
+    .quiz-nav-meta {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .quiz-mini-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--subtle);
+      background: rgba(255,255,255,0.88);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.86);
     }
 
     .quiz-tag {
@@ -450,6 +502,57 @@
       color: var(--accent-deep);
     }
 
+    .feedback-explanation {
+      margin-top: 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.7);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.8);
+      overflow: hidden;
+    }
+
+    .feedback-explanation-head {
+      padding: 14px 16px 10px;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--subtle);
+    }
+
+    .feedback-explanation-body {
+      max-height: min(42vh, 360px);
+      overflow-y: auto;
+      padding: 0 16px 16px;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+
+    .feedback-paragraph {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.9;
+      text-align: left;
+      word-break: break-word;
+      color: var(--text);
+    }
+
+    .feedback-paragraph + .feedback-paragraph,
+    .feedback-note + .feedback-paragraph,
+    .feedback-paragraph + .feedback-note,
+    .feedback-note + .feedback-note {
+      margin-top: 14px;
+    }
+
+    .feedback-note {
+      margin: 0;
+      padding: 12px 14px;
+      border-radius: 18px;
+      font-size: 17px;
+      line-height: 1.8;
+      text-align: left;
+      color: #8d5a11;
+      background: rgba(255, 245, 222, 0.96);
+      box-shadow: inset 0 0 0 1px rgba(245, 201, 74, 0.22);
+    }
+
     .footer-actions {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       margin-top: 18px;
@@ -530,6 +633,24 @@
         padding-right: 108px;
       }
 
+      .quiz-nav {
+        top: calc(var(--safe-top) + 2px);
+        align-items: stretch;
+      }
+
+      .quiz-nav-home {
+        width: 100%;
+      }
+
+      .quiz-nav-meta {
+        justify-content: flex-start;
+      }
+
+      .quiz-mini-tag {
+        min-height: 38px;
+        font-size: 15px;
+      }
+
       .hero-badges,
       .count-grid,
       .voice-grid,
@@ -550,6 +671,15 @@
       .nav-button,
       .choice-chip {
         min-height: 64px;
+      }
+
+      .feedback-explanation-body {
+        max-height: min(38vh, 320px);
+      }
+
+      .feedback-paragraph,
+      .feedback-note {
+        font-size: 17px;
       }
     }
 
@@ -1952,7 +2082,9 @@
         available: typeof window !== 'undefined' && 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window,
         unlocked: false,
         voice: null,
-        warned: false
+        warned: false,
+        sequence: 0,
+        timer: 0
       }
     };
 
@@ -2067,15 +2199,88 @@
     }
 
     function stopSpeech() {
-      if (!state.speech.available) return;
-      try {
-        speechSynthesis.cancel();
-      } catch (error) {}
+      startSpeechRun();
     }
 
     function getExplanationText(question) {
       const explanation = question && typeof question.explanation === 'string' ? question.explanation.trim() : '';
       return explanation || '本题讲解待补充';
+    }
+
+    function splitParagraphBySentence(paragraph) {
+      const text = String(paragraph || '').trim();
+      if (!text) return [];
+      const sentences = text
+        .split(/(?<=[。！？])/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+
+      if (!sentences.length) return [text];
+
+      const chunks = [];
+      let current = '';
+      sentences.forEach((sentence) => {
+        if (!current) {
+          current = sentence;
+          return;
+        }
+        if ((current + sentence).length > 92) {
+          chunks.push(current);
+          current = sentence;
+          return;
+        }
+        current += sentence;
+      });
+
+      if (current) chunks.push(current);
+      return chunks;
+    }
+
+    function getExplanationParagraphs(question) {
+      const explanation = getExplanationText(question);
+      if (!explanation) return [];
+
+      const hasBlankLines = /\n\s*\n/.test(explanation);
+      const roughParagraphs = hasBlankLines
+        ? explanation.split(/\n\s*\n+/)
+        : explanation.split(/\n+/);
+
+      const paragraphs = [];
+      roughParagraphs.forEach((item) => {
+        const paragraph = String(item || '').trim();
+        if (!paragraph) return;
+
+        if (!hasBlankLines && paragraph.length > 92 && !/\n/.test(paragraph)) {
+          paragraphs.push(...splitParagraphBySentence(paragraph));
+          return;
+        }
+
+        paragraphs.push(paragraph);
+      });
+
+      return paragraphs.length ? paragraphs : splitParagraphBySentence(explanation);
+    }
+
+    function isExplanationHighlight(paragraph) {
+      return /^(记忆点|记忆小提示|总结|小结)[:：]/.test(String(paragraph || '').trim());
+    }
+
+    function renderExplanation(question) {
+      const paragraphs = getExplanationParagraphs(question);
+      return `
+        <div class="feedback-explanation">
+          <div class="feedback-explanation-head">题目解析</div>
+          <div class="feedback-explanation-body">
+            ${paragraphs.map((paragraph) => {
+              const html = escapeHtml(paragraph).replace(/\n/g, '<br />');
+              if (isExplanationHighlight(paragraph)) {
+                return `<div class="feedback-note">${html}</div>`;
+              }
+              return `<p class="feedback-paragraph">${html}</p>`;
+            }).join('')}
+          </div>
+        </div>
+      `;
     }
 
     function getRevealedClueCount(question) {
@@ -2101,7 +2306,25 @@
       return getRevealedClueCount(question) < question.clues.length;
     }
 
+    function startSpeechRun() {
+      if (state.speech.timer) {
+        window.clearTimeout(state.speech.timer);
+        state.speech.timer = 0;
+      }
+      state.speech.sequence += 1;
+      if (state.speech.available) {
+        try {
+          speechSynthesis.cancel();
+        } catch (error) {}
+      }
+      return state.speech.sequence;
+    }
+
     function speakText(text) {
+      speakSegments([text]);
+    }
+
+    function speakSegments(segments) {
       if (!state.voiceEnabled) return;
       if (!state.speech.available) {
         if (!state.speech.warned) {
@@ -2111,41 +2334,68 @@
         return;
       }
       if (!state.speech.unlocked) return;
-      stopSpeech();
+
+      const queue = (Array.isArray(segments) ? segments : [segments])
+        .map((segment) => String(segment || '').trim())
+        .filter(Boolean);
+
+      if (!queue.length) return;
+
       const voice = pickVoice();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = voice && voice.lang ? voice.lang : 'zh-CN';
-      utterance.voice = voice || null;
-      utterance.rate = 0.93;
-      utterance.pitch = 1.04;
-      utterance.volume = 1;
-      speechSynthesis.speak(utterance);
+      const sequence = startSpeechRun();
+      let index = 0;
+
+      function speakNext() {
+        if (sequence !== state.speech.sequence || index >= queue.length) return;
+        const utterance = new SpeechSynthesisUtterance(queue[index]);
+        utterance.lang = voice && voice.lang ? voice.lang : 'zh-CN';
+        utterance.voice = voice || null;
+        utterance.rate = 0.93;
+        utterance.pitch = 1.04;
+        utterance.volume = 1;
+        utterance.onend = () => {
+          if (sequence !== state.speech.sequence) return;
+          index += 1;
+          if (index >= queue.length) return;
+          state.speech.timer = window.setTimeout(() => {
+            state.speech.timer = 0;
+            speakNext();
+          }, 220);
+        };
+        utterance.onerror = () => {
+          if (sequence !== state.speech.sequence) return;
+          index += 1;
+          if (index >= queue.length) return;
+          state.speech.timer = window.setTimeout(() => {
+            state.speech.timer = 0;
+            speakNext();
+          }, 180);
+        };
+        speechSynthesis.speak(utterance);
+      }
+
+      speakNext();
     }
 
-    function getQuestionSpeechText(question, withExplanation) {
+    function getQuestionSpeechSegments(question, withExplanation) {
       const revealAllClues = withExplanation || Boolean(state.session && state.session.answers && state.session.answers[question.id]);
       const visibleClues = getVisibleClues(question, revealAllClues);
       const parts = [
-        '第' + question.displayNo + '题。',
-        question.question
+        '第' + question.displayNo + '题。' + question.question
       ];
       if (visibleClues.length) {
-        parts.push('线索。');
         visibleClues.forEach((clue, index) => {
-          parts.push('第' + (index + 1) + '条，' + clue);
+          parts.push('第' + (index + 1) + '条线索。' + clue);
         });
       }
       if (Array.isArray(question.options) && question.options.length) {
-        parts.push('选项。');
-        question.options.forEach((option) => {
-          parts.push(option.key + '，' + option.text);
-        });
+        parts.push('选项。' + question.options.map((option) => option.key + '，' + option.text).join('。'));
       }
       if (withExplanation) {
         parts.push('正确答案是' + question.answerText + '。');
-        parts.push(getExplanationText(question));
+        parts.push(...getExplanationParagraphs(question));
       }
-      return parts.join('');
+      return parts;
     }
 
     function startSession(mode) {
@@ -2197,8 +2447,12 @@
     function queueQuestionSpeech(withExplanation) {
       const question = getCurrentQuestion();
       if (!question) return;
-      window.setTimeout(() => {
-        speakText(getQuestionSpeechText(question, withExplanation));
+      if (state.speech.timer) {
+        window.clearTimeout(state.speech.timer);
+      }
+      state.speech.timer = window.setTimeout(() => {
+        state.speech.timer = 0;
+        speakSegments(getQuestionSpeechSegments(question, withExplanation));
       }, 80);
     }
 
@@ -2255,8 +2509,12 @@
       const nextCount = getRevealedClueCount(question) + 1;
       state.session.clueProgress[question.id] = nextCount;
       render();
-      window.setTimeout(() => {
-        speakText('第' + nextCount + '条线索。' + question.clues[nextCount - 1]);
+      if (state.speech.timer) {
+        window.clearTimeout(state.speech.timer);
+      }
+      state.speech.timer = window.setTimeout(() => {
+        state.speech.timer = 0;
+        speakSegments(['第' + nextCount + '条线索。' + question.clues[nextCount - 1]]);
       }, 80);
     }
 
@@ -2281,7 +2539,19 @@
       const question = getCurrentQuestion();
       if (!question) return;
       const answered = Boolean(getCurrentAnswerRecord());
-      speakText(getQuestionSpeechText(question, answered));
+      speakSegments(getQuestionSpeechSegments(question, answered));
+    }
+
+    function goHome() {
+      const shouldConfirm = state.view === 'quiz' && Boolean(state.session);
+      if (shouldConfirm) {
+        const sure = window.confirm('现在返回主页，本次练习进度不会继续保留。确定返回吗？');
+        if (!sure) return;
+      }
+      stopSpeech();
+      state.session = null;
+      state.view = 'home';
+      render();
     }
 
     function countStats() {
@@ -2426,10 +2696,12 @@
       const question = getCurrentQuestion();
       if (!question) return '';
       const record = getCurrentAnswerRecord();
-      const stats = countStats();
       const progress = ((state.session.currentIndex + 1) / state.session.questions.length) * 100;
       const lastQuestion = state.session.currentIndex === state.session.questions.length - 1;
       const visibleClues = getVisibleClues(question, Boolean(record));
+      const voiceStatus = state.speech.available
+        ? (state.voiceEnabled ? '语音已开启' : '语音已关闭')
+        : '语音不可用';
       const feedbackTitle = record ? (record.correct ? '答对啦，真会观察！' : '这次先记住，也很棒！') : '';
       const feedbackText = record
         ? (record.correct
@@ -2439,6 +2711,13 @@
 
       return `
         <section class="panel quiz-card">
+          <div class="quiz-nav">
+            <button class="small-button quiz-nav-home" data-action="go-home">返回主页</button>
+            <div class="quiz-nav-meta">
+              <div class="quiz-mini-tag">当前 ${state.session.currentIndex + 1} / ${state.session.questions.length}</div>
+              <div class="quiz-mini-tag">${voiceStatus}</div>
+            </div>
+          </div>
           <div class="quiz-top">
             <div class="quiz-tag">第 ${escapeHtml(question.displayNo)} 题</div>
             <div class="quiz-tag">进度 ${state.session.currentIndex + 1} / ${state.session.questions.length}</div>
@@ -2463,7 +2742,7 @@
               <div class="feedback-title">${feedbackTitle}</div>
               <div>${feedbackText}</div>
               <div class="feedback-answer">正确答案：${escapeHtml(question.answerText)}</div>
-              <div>${escapeHtml(getExplanationText(question))}</div>
+              ${renderExplanation(question)}
             </div>
           ` : ''}
           <div class="footer-actions full">
@@ -2579,9 +2858,7 @@
           startSession('wrong');
           break;
         case 'go-home':
-          stopSpeech();
-          state.view = 'home';
-          render();
+          goHome();
           break;
         default:
           break;
