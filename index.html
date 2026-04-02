@@ -178,6 +178,76 @@
       color: var(--accent-deep);
     }
 
+    .growth-panel {
+      margin-top: 18px;
+      padding: 20px;
+    }
+
+    .growth-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .growth-card {
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.88);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.84);
+    }
+
+    .growth-kicker {
+      font-size: 15px;
+      color: var(--subtle);
+    }
+
+    .growth-value {
+      margin-top: 8px;
+      font-size: clamp(24px, 5.5vw, 34px);
+      font-weight: 800;
+      color: var(--accent-deep);
+    }
+
+    .growth-note {
+      margin-top: 6px;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--subtle);
+    }
+
+    .badge-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .badge-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--subtle);
+      background: rgba(255,255,255,0.74);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.86);
+    }
+
+    .badge-pill.on {
+      color: #8d5a11;
+      background: linear-gradient(135deg, rgba(255,245,222,0.98), rgba(245,201,74,0.56));
+      box-shadow: 0 12px 24px rgba(245, 201, 74, 0.14);
+    }
+
+    .goal-box {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(255,245,222,0.98), rgba(255,255,255,0.92));
+      font-size: 18px;
+      line-height: 1.7;
+      color: #8d5a11;
+    }
+
     .section {
       margin-top: 18px;
       padding: 20px;
@@ -195,6 +265,25 @@
 
     .voice-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .setting-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .setting-block {
+      padding: 14px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.68);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.82);
+    }
+
+    .setting-label {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--subtle);
     }
 
     .choice-chip,
@@ -317,6 +406,7 @@
 
     .quiz-card,
     .result-card {
+      position: relative;
       padding: 20px;
     }
 
@@ -378,6 +468,13 @@
       color: var(--subtle);
       background: rgba(255,255,255,0.88);
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.86);
+    }
+
+    .star-counter.pulse {
+      animation: badge-bump 0.78s ease;
+      color: #8d5a11;
+      background: linear-gradient(135deg, rgba(255,245,222,0.98), rgba(245,201,74,0.62));
+      box-shadow: 0 12px 22px rgba(245, 201, 74, 0.16);
     }
 
     .quiz-tag {
@@ -474,6 +571,14 @@
       transform: translateY(-1px) scale(1.01);
     }
 
+    .option-button.reward-good {
+      animation: correct-bounce 0.78s ease;
+    }
+
+    .option-button.reward-bad {
+      animation: wrong-shake 0.56s ease;
+    }
+
     .feedback-card {
       margin-top: 18px;
       padding: 18px;
@@ -551,6 +656,148 @@
       color: #8d5a11;
       background: rgba(255, 245, 222, 0.96);
       box-shadow: inset 0 0 0 1px rgba(245, 201, 74, 0.22);
+    }
+
+    .fx-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 7;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .fx-stack {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      top: 88px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .answer-toast {
+      padding: 14px 16px;
+      border-radius: 20px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: white;
+      box-shadow: 0 16px 28px rgba(61, 44, 66, 0.16);
+      opacity: 0;
+      animation: toast-rise 1.8s ease forwards;
+    }
+
+    .answer-toast strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .answer-toast.good {
+      background: linear-gradient(135deg, rgba(82,183,136,0.96), rgba(119,200,244,0.9));
+    }
+
+    .answer-toast.bad {
+      background: linear-gradient(135deg, rgba(240,113,103,0.88), rgba(255,184,176,0.92));
+    }
+
+    .answer-toast.badge-toast {
+      color: #8d5a11;
+      background: linear-gradient(135deg, rgba(255,245,222,0.98), rgba(245,201,74,0.7));
+    }
+
+    .star-burst {
+      position: absolute;
+      left: 50%;
+      top: 58%;
+      padding: 12px 16px;
+      border-radius: 999px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent-deep);
+      background: rgba(255,255,255,0.98);
+      box-shadow: 0 18px 30px rgba(115,109,133,0.18);
+      transform: translate(-50%, -50%);
+      animation: star-fly 0.95s ease forwards;
+      white-space: nowrap;
+    }
+
+    @keyframes toast-rise {
+      0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+      12%,
+      72% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.98);
+      }
+    }
+
+    @keyframes correct-bounce {
+      0%,
+      100% {
+        transform: translateY(-1px) scale(1.01);
+      }
+      28% {
+        transform: translateY(-6px) scale(1.05);
+      }
+      52% {
+        transform: translateY(0) scale(0.99);
+      }
+      76% {
+        transform: translateY(-2px) scale(1.02);
+      }
+    }
+
+    @keyframes wrong-shake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-6px);
+      }
+      40% {
+        transform: translateX(5px);
+      }
+      60% {
+        transform: translateX(-4px);
+      }
+      80% {
+        transform: translateX(3px);
+      }
+    }
+
+    @keyframes star-fly {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+      }
+      18% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.04);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(118px, -230px) scale(0.88);
+      }
+    }
+
+    @keyframes badge-bump {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      30% {
+        transform: scale(1.08);
+      }
+      58% {
+        transform: scale(0.96);
+      }
     }
 
     .footer-actions {
@@ -652,6 +899,7 @@
       }
 
       .hero-badges,
+      .growth-grid,
       .count-grid,
       .voice-grid,
       .action-row,
@@ -681,6 +929,10 @@
       .feedback-note {
         font-size: 17px;
       }
+
+      .fx-stack {
+        top: 118px;
+      }
     }
 
     @media (hover: hover) {
@@ -700,7 +952,10 @@
     const STORAGE_KEYS = {
       wrongBook: 'zzx_wrong_book_v1',
       totalStars: 'zzx_total_stars_v1',
-      voiceEnabled: 'zzx_voice_enabled_v1'
+      voiceEnabled: 'zzx_voice_enabled_v1',
+      soundEnabled: 'zzx_sound_enabled_v1',
+      badgesUnlocked: 'zzx_badges_unlocked_v1',
+      latestBadgeId: 'zzx_latest_badge_v1'
     };
 
     const RAW_QUESTION_BANK = [
@@ -2068,16 +2323,51 @@
 
     const QUESTION_BANK = RAW_QUESTION_BANK.map(normalizeQuestion);
 
+    const BADGE_DEFINITIONS = [
+      {
+        id: 'streak3',
+        name: '三连答对',
+        short: '3连',
+        cheer: '连续答对 3 题，节奏特别稳。'
+      },
+      {
+        id: 'streak5',
+        name: '五连答对',
+        short: '5连',
+        cheer: '连续答对 5 题，状态越来越好了。'
+      },
+      {
+        id: 'round10',
+        name: '认真小达人',
+        short: '10题',
+        cheer: '一轮里答对 10 题，专注力很棒。'
+      },
+      {
+        id: 'finisher',
+        name: '闯关完成',
+        short: '完成',
+        cheer: '第一次完整完成一整轮练习啦。'
+      }
+    ];
+
     const state = {
       questions: QUESTION_BANK,
       view: 'home',
       countChoice: '10',
       voiceEnabled: loadStoredBoolean(STORAGE_KEYS.voiceEnabled, true),
+      soundEnabled: loadStoredBoolean(STORAGE_KEYS.soundEnabled, true),
       totalStars: loadStoredNumber(STORAGE_KEYS.totalStars, 0),
       wrongBook: loadWrongBook(),
+      badgesUnlocked: loadBadgesUnlocked(),
+      latestBadgeId: loadStoredString(STORAGE_KEYS.latestBadgeId, ''),
       notice: '',
       noticeTone: 'info',
       session: null,
+      flash: null,
+      badgeToast: null,
+      answerEffect: null,
+      starBurst: null,
+      starCounterPulse: false,
       speech: {
         available: typeof window !== 'undefined' && 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window,
         unlocked: false,
@@ -2085,16 +2375,36 @@
         warned: false,
         sequence: 0,
         timer: 0
+      },
+      audio: {
+        available: typeof window !== 'undefined' && Boolean(window.AudioContext || window.webkitAudioContext),
+        context: null
       }
     };
 
     const app = document.getElementById('app');
+    const effectTimers = {
+      flash: 0,
+      badgeToast: 0,
+      answerEffect: 0,
+      starBurst: 0,
+      starCounterPulse: 0
+    };
 
     function loadStoredBoolean(key, fallback) {
       try {
         const raw = localStorage.getItem(key);
         if (raw === null) return fallback;
         return raw === 'true';
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function loadStoredString(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw === null ? fallback : String(raw);
       } catch (error) {
         return fallback;
       }
@@ -2121,6 +2431,17 @@
       }
     }
 
+    function loadBadgesUnlocked() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.badgesUnlocked);
+        if (!raw) return {};
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
     function saveWrongBook() {
       try {
         localStorage.setItem(STORAGE_KEYS.wrongBook, JSON.stringify(state.wrongBook));
@@ -2133,9 +2454,22 @@
       } catch (error) {}
     }
 
+    function saveSoundEnabled() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.soundEnabled, String(state.soundEnabled));
+      } catch (error) {}
+    }
+
     function saveTotalStars() {
       try {
         localStorage.setItem(STORAGE_KEYS.totalStars, String(state.totalStars));
+      } catch (error) {}
+    }
+
+    function saveBadgesUnlocked() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.badgesUnlocked, JSON.stringify(state.badgesUnlocked));
+        localStorage.setItem(STORAGE_KEYS.latestBadgeId, state.latestBadgeId || '');
       } catch (error) {}
     }
 
@@ -2152,6 +2486,157 @@
             render();
           }
         }, 3000);
+      }
+    }
+
+    function clearEffectTimer(name) {
+      if (!effectTimers[name]) return;
+      window.clearTimeout(effectTimers[name]);
+      effectTimers[name] = 0;
+    }
+
+    function getBadgeById(id) {
+      return BADGE_DEFINITIONS.find((badge) => badge.id === id) || null;
+    }
+
+    function getUnlockedBadges() {
+      return BADGE_DEFINITIONS.filter((badge) => state.badgesUnlocked[badge.id]);
+    }
+
+    function getLatestBadge() {
+      return getBadgeById(state.latestBadgeId);
+    }
+
+    function unlockBadge(id) {
+      if (!id || state.badgesUnlocked[id]) return null;
+      const badge = getBadgeById(id);
+      if (!badge) return null;
+      state.badgesUnlocked[id] = Date.now();
+      state.latestBadgeId = id;
+      saveBadgesUnlocked();
+      return badge;
+    }
+
+    function unlockEligibleBadges(stats, includeFinishBadge) {
+      const unlocked = [];
+      if (state.session && state.session.streakCorrect >= 3) {
+        const badge = unlockBadge('streak3');
+        if (badge) unlocked.push(badge);
+      }
+      if (state.session && state.session.streakCorrect >= 5) {
+        const badge = unlockBadge('streak5');
+        if (badge) unlocked.push(badge);
+      }
+      if (stats && stats.correct >= 10) {
+        const badge = unlockBadge('round10');
+        if (badge) unlocked.push(badge);
+      }
+      if (includeFinishBadge && stats && stats.total && stats.answered === stats.total) {
+        const badge = unlockBadge('finisher');
+        if (badge) unlocked.push(badge);
+      }
+      return unlocked;
+    }
+
+    function getHomeGoalText() {
+      if (!state.badgesUnlocked.streak3) return '再连续答对 3 题试试，先点亮“三连答对”。';
+      if (!state.badgesUnlocked.streak5) return '再冲一冲，连续答对 5 题可解锁“五连答对”。';
+      if (!state.badgesUnlocked.round10) return '单轮答对 10 题，可解锁“认真小达人”。';
+      if (!state.badgesUnlocked.finisher) return '完整完成一轮练习，可解锁“闯关完成”。';
+      return '继续闯关，星星和奖章都会慢慢变多。';
+    }
+
+    function getQuizGoalText(stats) {
+      if (!state.session) return '继续保持。';
+      if (!state.badgesUnlocked.streak3 && state.session.streakCorrect < 3) {
+        return '还差 ' + (3 - state.session.streakCorrect) + ' 题解锁“三连答对”。';
+      }
+      if (!state.badgesUnlocked.streak5 && state.session.streakCorrect < 5) {
+        return '还差 ' + (5 - state.session.streakCorrect) + ' 题解锁“五连答对”。';
+      }
+      if (!state.badgesUnlocked.round10 && stats.correct < 10) {
+        return '单轮再答对 ' + (10 - stats.correct) + ' 题解锁“认真小达人”。';
+      }
+      if (!state.badgesUnlocked.finisher && stats.answered < stats.total) {
+        return '再完成 ' + (stats.total - stats.answered) + ' 题可解锁“闯关完成”。';
+      }
+      return '离下一个奖章更近了。';
+    }
+
+    function showFlash(tone, title, detail) {
+      clearEffectTimer('flash');
+      state.flash = { tone, title, detail };
+      render();
+      effectTimers.flash = window.setTimeout(() => {
+        effectTimers.flash = 0;
+        state.flash = null;
+        render();
+      }, 1800);
+    }
+
+    function showBadgeToast(badge) {
+      if (!badge) return;
+      clearEffectTimer('badgeToast');
+      state.badgeToast = badge;
+      render();
+      effectTimers.badgeToast = window.setTimeout(() => {
+        effectTimers.badgeToast = 0;
+        state.badgeToast = null;
+        render();
+      }, 2400);
+    }
+
+    function triggerAnswerEffect(questionId, optionKey, tone) {
+      clearEffectTimer('answerEffect');
+      state.answerEffect = {
+        questionId,
+        optionKey,
+        tone
+      };
+      render();
+      effectTimers.answerEffect = window.setTimeout(() => {
+        effectTimers.answerEffect = 0;
+        if (state.answerEffect && state.answerEffect.questionId === questionId && state.answerEffect.optionKey === optionKey) {
+          state.answerEffect = null;
+          render();
+        }
+      }, 900);
+    }
+
+    function triggerStarReward() {
+      clearEffectTimer('starBurst');
+      clearEffectTimer('starCounterPulse');
+      state.starBurst = {
+        id: Date.now(),
+        label: '+1 星'
+      };
+      state.starCounterPulse = true;
+      render();
+      effectTimers.starBurst = window.setTimeout(() => {
+        effectTimers.starBurst = 0;
+        state.starBurst = null;
+        render();
+      }, 1000);
+      effectTimers.starCounterPulse = window.setTimeout(() => {
+        effectTimers.starCounterPulse = 0;
+        state.starCounterPulse = false;
+        render();
+      }, 860);
+    }
+
+    function clearRewardFeedback(options) {
+      const keepBadgeToast = Boolean(options && options.keepBadgeToast);
+      clearEffectTimer('flash');
+      clearEffectTimer('answerEffect');
+      clearEffectTimer('starBurst');
+      clearEffectTimer('starCounterPulse');
+      state.flash = null;
+      state.answerEffect = null;
+      state.starBurst = null;
+      state.starCounterPulse = false;
+      if (!keepBadgeToast) {
+        clearEffectTimer('badgeToast');
+        state.badgeToast = null;
       }
     }
 
@@ -2177,14 +2662,16 @@
     }
 
     function unlockSpeech() {
-      if (!state.speech.available || state.speech.unlocked) return;
-      try {
-        const utterance = new SpeechSynthesisUtterance(' ');
-        utterance.volume = 0;
-        speechSynthesis.speak(utterance);
-        speechSynthesis.cancel();
-      } catch (error) {}
-      state.speech.unlocked = true;
+      if (state.speech.available && !state.speech.unlocked) {
+        try {
+          const utterance = new SpeechSynthesisUtterance(' ');
+          utterance.volume = 0;
+          speechSynthesis.speak(utterance);
+          speechSynthesis.cancel();
+        } catch (error) {}
+        state.speech.unlocked = true;
+      }
+      unlockAudio();
     }
 
     function pickVoice() {
@@ -2196,6 +2683,66 @@
       const femaleVoice = zhVoices.find((voice) => femaleHint.test(voice.name + ' ' + voice.voiceURI));
       state.speech.voice = femaleVoice || zhVoices[0] || voices[0] || null;
       return state.speech.voice;
+    }
+
+    function getAudioContext() {
+      if (!state.audio.available) return null;
+      if (!state.audio.context) {
+        const AudioCtor = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtor) return null;
+        try {
+          state.audio.context = new AudioCtor();
+        } catch (error) {
+          state.audio.available = false;
+          return null;
+        }
+      }
+      return state.audio.context;
+    }
+
+    function unlockAudio() {
+      const context = getAudioContext();
+      if (!context || context.state !== 'suspended') return;
+      context.resume().catch(() => {});
+    }
+
+    function playFeedbackSound(tone) {
+      if (!state.soundEnabled) return;
+      const context = getAudioContext();
+      if (!context) return;
+
+      const schedule = () => {
+        const now = context.currentTime + 0.01;
+        const notes = tone === 'correct'
+          ? [
+              { frequency: 740, duration: 0.09, type: 'triangle', gain: 0.055, delay: 0 },
+              { frequency: 980, duration: 0.12, type: 'triangle', gain: 0.05, delay: 0.095 }
+            ]
+          : [
+              { frequency: 280, duration: 0.1, type: 'sine', gain: 0.04, delay: 0 },
+              { frequency: 220, duration: 0.12, type: 'sine', gain: 0.032, delay: 0.085 }
+            ];
+
+        notes.forEach((note) => {
+          const oscillator = context.createOscillator();
+          const gainNode = context.createGain();
+          oscillator.type = note.type;
+          oscillator.frequency.setValueAtTime(note.frequency, now + note.delay);
+          gainNode.gain.setValueAtTime(0.0001, now + note.delay);
+          gainNode.gain.exponentialRampToValueAtTime(note.gain, now + note.delay + 0.02);
+          gainNode.gain.exponentialRampToValueAtTime(0.0001, now + note.delay + note.duration);
+          oscillator.connect(gainNode);
+          gainNode.connect(context.destination);
+          oscillator.start(now + note.delay);
+          oscillator.stop(now + note.delay + note.duration + 0.02);
+        });
+      };
+
+      if (context.state === 'suspended') {
+        context.resume().then(schedule).catch(() => {});
+      } else {
+        schedule();
+      }
     }
 
     function stopSpeech() {
@@ -2400,6 +2947,7 @@
 
     function startSession(mode) {
       unlockSpeech();
+      clearRewardFeedback();
       const sourceList = mode === 'wrong' ? getWrongQuestions() : state.questions.slice();
       if (!sourceList.length) {
         setNotice('错题本还是空的，我们先去顺序练习吧。', 'warning');
@@ -2437,6 +2985,7 @@
         currentIndex: 0,
         answers: {},
         clueProgress,
+        streakCorrect: 0,
         starsEarned: 0
       };
       state.view = 'quiz';
@@ -2484,10 +3033,22 @@
       };
 
       if (isCorrect) {
+        state.session.streakCorrect += 1;
         state.session.starsEarned += 1;
         state.totalStars += 1;
         saveTotalStars();
+        playFeedbackSound('correct');
+        triggerAnswerEffect(question.id, optionKey, 'good');
+        triggerStarReward();
+        const stats = countStats();
+        const unlockedBadges = unlockEligibleBadges(stats, false);
+        showFlash('good', ['答对了！', '太好了！', '继续加油！'][Math.floor(Math.random() * 3)], '已连续答对 ' + state.session.streakCorrect + ' 题，' + getQuizGoalText(stats));
+        if (unlockedBadges.length) {
+          showBadgeToast(unlockedBadges[unlockedBadges.length - 1]);
+        }
       } else {
+        const previousStreak = state.session.streakCorrect;
+        state.session.streakCorrect = 0;
         state.wrongBook[question.id] = {
           id: question.id,
           displayNo: question.displayNo,
@@ -2496,6 +3057,9 @@
           savedAt: Date.now()
         };
         saveWrongBook();
+        playFeedbackSound('wrong');
+        triggerAnswerEffect(question.id, optionKey, 'bad');
+        showFlash('bad', '再看看答案', previousStreak > 1 ? '刚才已经连续答对 ' + previousStreak + ' 题啦，下一题继续冲。' : '答案已经帮你标出来了，下一题继续加油。');
       }
 
       render();
@@ -2520,6 +3084,7 @@
 
     function goQuestion(step) {
       if (!state.session) return;
+      clearRewardFeedback();
       stopSpeech();
       const nextIndex = state.session.currentIndex + step;
       if (nextIndex < 0 || nextIndex >= state.session.questions.length) return;
@@ -2530,8 +3095,14 @@
 
     function showResult() {
       stopSpeech();
+      clearRewardFeedback();
+      const stats = countStats();
+      const unlockedBadges = unlockEligibleBadges(stats, true);
       state.view = 'result';
       render();
+      if (unlockedBadges.length) {
+        showBadgeToast(unlockedBadges[unlockedBadges.length - 1]);
+      }
     }
 
     function replaySpeech() {
@@ -2549,6 +3120,7 @@
         if (!sure) return;
       }
       stopSpeech();
+      clearRewardFeedback();
       state.session = null;
       state.view = 'home';
       render();
@@ -2609,8 +3181,33 @@
       return '<div class="notice ' + tone + '">' + escapeHtml(state.notice) + '</div>';
     }
 
+    function renderFeedbackLayer() {
+      if (!state.flash && !state.badgeToast && !state.starBurst) return '';
+      return `
+        <div class="fx-layer">
+          <div class="fx-stack">
+            ${state.flash ? `
+              <div class="answer-toast ${escapeHtml(state.flash.tone)}">
+                <strong>${escapeHtml(state.flash.title)}</strong>
+                <div>${escapeHtml(state.flash.detail || '')}</div>
+              </div>
+            ` : ''}
+            ${state.badgeToast ? `
+              <div class="answer-toast badge-toast">
+                <strong>奖章解锁：${escapeHtml(state.badgeToast.name)}</strong>
+                <div>${escapeHtml(state.badgeToast.cheer)}</div>
+              </div>
+            ` : ''}
+          </div>
+          ${state.starBurst ? `<div class="star-burst">${escapeHtml(state.starBurst.label)}</div>` : ''}
+        </div>
+      `;
+    }
+
     function renderHome() {
       const wrongCount = Object.keys(state.wrongBook).length;
+      const unlockedBadges = getUnlockedBadges();
+      const latestBadge = getLatestBadge();
       return `
         <section class="panel home-hero">
           <h1 class="title">行中轴 知历史</h1>
@@ -2621,10 +3218,37 @@
               <div class="badge-value">${state.totalStars}</div>
             </div>
             <div class="badge-card">
-              <div class="badge-label">小奖章</div>
-              <div class="badge-value">${medalsFromStars(state.totalStars)}</div>
+              <div class="badge-label">已得奖章</div>
+              <div class="badge-value">${unlockedBadges.length}</div>
             </div>
           </div>
+        </section>
+
+        <section class="panel growth-panel">
+          <h2 class="section-title">成长区</h2>
+          <div class="growth-grid">
+            <div class="growth-card">
+              <div class="growth-kicker">累计星星</div>
+              <div class="growth-value">${state.totalStars}</div>
+              <div class="growth-note">每答对一题，就多收下一颗。</div>
+            </div>
+            <div class="growth-card">
+              <div class="growth-kicker">已得奖章</div>
+              <div class="growth-value">${unlockedBadges.length}</div>
+              <div class="growth-note">${unlockedBadges.length ? '奖章会一直保留在这里。' : '先去点亮第一枚吧。'}</div>
+            </div>
+            <div class="growth-card">
+              <div class="growth-kicker">最近奖章</div>
+              <div class="growth-value">${latestBadge ? escapeHtml(latestBadge.name) : '还没有'}</div>
+              <div class="growth-note">${latestBadge ? escapeHtml(latestBadge.cheer) : '再答对 3 题试试。'}</div>
+            </div>
+          </div>
+          <div class="badge-list">
+            ${BADGE_DEFINITIONS.map((badge) => `
+              <div class="badge-pill ${state.badgesUnlocked[badge.id] ? 'on' : ''}">${badge.short} ${badge.name}</div>
+            `).join('')}
+          </div>
+          <div class="goal-box">${latestBadge ? '最近获得：' + escapeHtml(latestBadge.name) + '。' : ''}${escapeHtml(getHomeGoalText())}</div>
         </section>
 
         <section class="panel section">
@@ -2641,12 +3265,24 @@
         </section>
 
         <section class="panel section">
-          <h2 class="section-title">语音开关</h2>
-          <div class="voice-grid">
-            <button class="choice-chip ${state.voiceEnabled ? 'active' : ''}" data-action="set-voice" data-value="on">开启语音</button>
-            <button class="choice-chip ${!state.voiceEnabled ? 'active' : ''}" data-action="set-voice" data-value="off">关闭语音</button>
+          <h2 class="section-title">语音与音效</h2>
+          <div class="setting-stack">
+            <div class="setting-block">
+              <div class="setting-label">语音朗读</div>
+              <div class="voice-grid">
+                <button class="choice-chip ${state.voiceEnabled ? 'active' : ''}" data-action="set-voice" data-value="on">开启语音</button>
+                <button class="choice-chip ${!state.voiceEnabled ? 'active' : ''}" data-action="set-voice" data-value="off">关闭语音</button>
+              </div>
+            </div>
+            <div class="setting-block">
+              <div class="setting-label">答题音效</div>
+              <div class="voice-grid">
+                <button class="choice-chip ${state.soundEnabled ? 'active' : ''}" data-action="set-sound" data-value="on">开启音效</button>
+                <button class="choice-chip ${!state.soundEnabled ? 'active' : ''}" data-action="set-sound" data-value="off">关闭音效</button>
+              </div>
+            </div>
           </div>
-          <div class="tiny-note">${state.speech.available ? '轻点任意开始按钮后，题目就可以朗读啦。' : '当前设备语音不可用，但不影响答题。'}</div>
+          <div class="tiny-note">${state.speech.available ? '轻点任意开始按钮后，语音和音效就能更稳定地工作啦。' : '当前设备语音不可用，但不影响答题。'}${state.audio.available ? '' : ' 当前设备音效不可用，会自动静默。'}</div>
         </section>
 
         <section class="panel section">
@@ -2682,6 +3318,9 @@
           if (option.key === question.answer) className += ' correct';
           if (option.key === record.selectedKey && option.key !== question.answer) className += ' wrong';
         }
+        if (state.answerEffect && state.answerEffect.questionId === question.id && state.answerEffect.optionKey === option.key) {
+          className += state.answerEffect.tone === 'good' ? ' reward-good' : ' reward-bad';
+        }
 
         return `
           <button class="${className}" data-action="answer" data-key="${option.key}" ${record ? 'disabled' : ''}>
@@ -2711,11 +3350,13 @@
 
       return `
         <section class="panel quiz-card">
+          ${renderFeedbackLayer()}
           <div class="quiz-nav">
             <button class="small-button quiz-nav-home" data-action="go-home">返回主页</button>
             <div class="quiz-nav-meta">
               <div class="quiz-mini-tag">当前 ${state.session.currentIndex + 1} / ${state.session.questions.length}</div>
               <div class="quiz-mini-tag">${voiceStatus}</div>
+              <div class="quiz-mini-tag star-counter ${state.starCounterPulse ? 'pulse' : ''}">累计星星 ${state.totalStars}</div>
             </div>
           </div>
           <div class="quiz-top">
@@ -2761,6 +3402,7 @@
       const stats = countStats();
       return `
         <section class="panel result-card">
+          ${renderFeedbackLayer()}
           <div class="quiz-top">
             <div class="quiz-tag">总分 ${stats.score} 分</div>
             <div class="quiz-tag">本轮星星 ${state.session ? state.session.starsEarned : 0}</div>
@@ -2819,6 +3461,12 @@
           state.voiceEnabled = button.dataset.value === 'on';
           saveVoiceEnabled();
           if (!state.voiceEnabled) stopSpeech();
+          render();
+          break;
+        case 'set-sound':
+          state.soundEnabled = button.dataset.value === 'on';
+          saveSoundEnabled();
+          if (state.soundEnabled) unlockAudio();
           render();
           break;
         case 'start':
