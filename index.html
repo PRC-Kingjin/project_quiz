@@ -1,0 +1,2604 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>行中轴 知历史</title>
+  <style>
+    :root {
+      --bg-top: #fff7dc;
+      --bg-bottom: #eef7ff;
+      --card: rgba(255, 255, 255, 0.9);
+      --card-strong: rgba(255, 255, 255, 0.97);
+      --text: #3d2c42;
+      --subtle: #6d6076;
+      --accent: #ff8f6b;
+      --accent-deep: #ef6f47;
+      --sky: #77c8f4;
+      --mint: #8fd9b6;
+      --gold: #f5c94a;
+      --rose: #ffb8b0;
+      --ok: #52b788;
+      --bad: #f07167;
+      --shadow: 0 18px 42px rgba(115, 109, 133, 0.18);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --safe-top: max(18px, env(safe-area-inset-top));
+      --safe-bottom: max(18px, env(safe-area-inset-bottom));
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.9), transparent 22%),
+        radial-gradient(circle at 88% 18%, rgba(255, 212, 121, 0.55), transparent 18%),
+        radial-gradient(circle at 80% 82%, rgba(119, 200, 244, 0.35), transparent 18%),
+        linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+      color: var(--text);
+      font-family: ui-rounded, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 999px;
+      filter: blur(2px);
+    }
+
+    body::before {
+      width: 180px;
+      height: 180px;
+      left: -40px;
+      top: 10vh;
+      background: rgba(255, 210, 141, 0.28);
+    }
+
+    body::after {
+      width: 220px;
+      height: 220px;
+      right: -80px;
+      bottom: 8vh;
+      background: rgba(126, 209, 233, 0.18);
+    }
+
+    button {
+      border: none;
+      background: none;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .app-shell {
+      position: relative;
+      z-index: 1;
+      width: min(960px, 100%);
+      margin: 0 auto;
+      padding: calc(var(--safe-top) + 10px) 16px calc(var(--safe-bottom) + 24px);
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+      backdrop-filter: blur(18px);
+    }
+
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 22px 22px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(255, 243, 214, 0.94)),
+        var(--card);
+    }
+
+    .home-hero::after {
+      content: "";
+      position: absolute;
+      right: 18px;
+      top: 18px;
+      width: 92px;
+      height: 92px;
+      border-radius: 28px 28px 28px 8px;
+      background:
+        radial-gradient(circle at 26% 32%, rgba(255,255,255,0.92) 0 14%, transparent 15%),
+        radial-gradient(circle at 68% 32%, rgba(255,255,255,0.92) 0 14%, transparent 15%),
+        radial-gradient(circle at 48% 68%, rgba(255,212,121,0.92) 0 18%, transparent 19%),
+        linear-gradient(135deg, rgba(255,184,176,0.95), rgba(255,143,107,0.95));
+      box-shadow: inset 0 -8px 16px rgba(255,255,255,0.28);
+      opacity: 0.9;
+      transform: rotate(8deg);
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(34px, 8vw, 52px);
+      line-height: 1.08;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      margin: 10px 0 0;
+      font-size: clamp(18px, 4.8vw, 24px);
+      color: var(--subtle);
+      line-height: 1.5;
+      max-width: 16em;
+    }
+
+    .hero-badges,
+    .count-grid,
+    .voice-grid,
+    .mode-grid,
+    .action-row,
+    .stats-grid,
+    .result-grid,
+    .clue-list,
+    .option-grid,
+    .footer-actions {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero-badges {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 20px;
+    }
+
+    .badge-card {
+      padding: 16px 18px;
+      border-radius: var(--radius-lg);
+      background: var(--card-strong);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.78);
+    }
+
+    .badge-label {
+      font-size: 16px;
+      color: var(--subtle);
+    }
+
+    .badge-value {
+      margin-top: 6px;
+      font-size: clamp(24px, 6vw, 34px);
+      font-weight: 700;
+      color: var(--accent-deep);
+    }
+
+    .section {
+      margin-top: 18px;
+      padding: 20px;
+    }
+
+    .section-title {
+      margin: 0 0 14px;
+      font-size: 22px;
+    }
+
+    .count-grid,
+    .voice-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .voice-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .choice-chip,
+    .mode-card,
+    .small-button,
+    .option-button,
+    .nav-button {
+      min-height: 68px;
+      border-radius: 999px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, opacity 0.18s ease;
+    }
+
+    .choice-chip {
+      padding: 0 10px;
+      font-size: 22px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.78);
+      box-shadow: inset 0 0 0 1px rgba(143, 217, 182, 0.35);
+    }
+
+    .choice-chip.active {
+      background: linear-gradient(135deg, rgba(143,217,182,0.94), rgba(119,200,244,0.88));
+      box-shadow: 0 12px 24px rgba(119,200,244,0.18);
+    }
+
+    .mode-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mode-card {
+      position: relative;
+      padding: 20px 22px;
+      border-radius: var(--radius-lg);
+      text-align: left;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.92), rgba(255,248,232,0.95));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.86);
+    }
+
+    .mode-card[data-tone="random"] {
+      background: linear-gradient(135deg, rgba(255,245,222,0.95), rgba(255,184,176,0.5));
+    }
+
+    .mode-card[data-tone="wrong"] {
+      background: linear-gradient(135deg, rgba(240,250,245,0.96), rgba(143,217,182,0.5));
+    }
+
+    .mode-title {
+      display: block;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .mode-desc {
+      display: block;
+      margin-top: 6px;
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--subtle);
+    }
+
+    .action-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .small-button,
+    .nav-button {
+      padding: 0 18px;
+      font-size: 20px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.86);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.85);
+    }
+
+    .small-button.primary,
+    .nav-button.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+      color: white;
+      box-shadow: 0 16px 28px rgba(239,111,71,0.22);
+    }
+
+    .small-button.warning {
+      background: linear-gradient(135deg, rgba(255, 216, 135, 0.95), rgba(245, 201, 74, 0.92));
+    }
+
+    .small-button.ghost {
+      background: rgba(255,255,255,0.7);
+      color: var(--subtle);
+    }
+
+    .small-button:disabled,
+    .nav-button:disabled,
+    .option-button:disabled {
+      opacity: 0.55;
+      cursor: default;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-size: 18px;
+      line-height: 1.5;
+      background: rgba(255,255,255,0.8);
+      color: var(--subtle);
+    }
+
+    .notice.warning {
+      background: rgba(255, 245, 222, 0.92);
+      color: #8d5a11;
+    }
+
+    .notice.bad {
+      background: rgba(255, 235, 233, 0.94);
+      color: #b74f46;
+    }
+
+    .quiz-card,
+    .result-card {
+      padding: 20px;
+    }
+
+    .quiz-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 18px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.82);
+      color: var(--accent-deep);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 16px;
+      margin-top: 16px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.72);
+      box-shadow: inset 0 1px 3px rgba(94, 87, 109, 0.12);
+    }
+
+    .progress-bar {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--sky), var(--mint));
+      transition: width 0.22s ease;
+    }
+
+    .question-title {
+      margin: 20px 0 10px;
+      font-size: clamp(28px, 7vw, 38px);
+      line-height: 1.45;
+    }
+
+    .clue-list {
+      margin-top: 16px;
+    }
+
+    .clue-item {
+      padding: 16px 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(119,200,244,0.16), rgba(143,217,182,0.16));
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    .option-grid {
+      grid-template-columns: 1fr;
+      margin-top: 18px;
+    }
+
+    .option-button {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      min-height: 84px;
+      padding: 16px 18px;
+      border-radius: 26px;
+      text-align: left;
+      font-size: clamp(24px, 5vw, 30px);
+      line-height: 1.45;
+      background: rgba(255,255,255,0.92);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.88);
+    }
+
+    .option-button .option-key {
+      flex: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      background: rgba(255, 216, 135, 0.55);
+    }
+
+    .option-button.correct {
+      background: rgba(214, 246, 228, 0.98);
+      box-shadow: inset 0 0 0 2px rgba(82, 183, 136, 0.35);
+    }
+
+    .option-button.wrong {
+      background: rgba(255, 229, 227, 0.98);
+      box-shadow: inset 0 0 0 2px rgba(240, 113, 103, 0.28);
+    }
+
+    .option-button.selected {
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    .feedback-card {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 26px;
+      font-size: 20px;
+      line-height: 1.75;
+      background: rgba(255,255,255,0.92);
+    }
+
+    .feedback-card.good {
+      background: linear-gradient(135deg, rgba(214,246,228,0.98), rgba(255,255,255,0.96));
+    }
+
+    .feedback-card.bad {
+      background: linear-gradient(135deg, rgba(255,229,227,0.98), rgba(255,255,255,0.96));
+    }
+
+    .feedback-title {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .feedback-answer {
+      font-weight: 700;
+      color: var(--accent-deep);
+    }
+
+    .footer-actions {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .footer-actions.full {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .result-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+
+    .result-item {
+      padding: 16px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.88);
+      text-align: center;
+    }
+
+    .result-label {
+      font-size: 17px;
+      color: var(--subtle);
+    }
+
+    .result-value {
+      margin-top: 8px;
+      font-size: clamp(28px, 6vw, 40px);
+      font-weight: 800;
+      color: var(--accent-deep);
+    }
+
+    .result-cheer {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255,245,222,0.98), rgba(255,255,255,0.92));
+      font-size: 22px;
+      line-height: 1.6;
+    }
+
+    .empty-state {
+      margin-top: 16px;
+      padding: 24px 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.84);
+      text-align: center;
+      font-size: 20px;
+      line-height: 1.7;
+      color: var(--subtle);
+    }
+
+    .tiny-note {
+      margin-top: 10px;
+      font-size: 16px;
+      color: var(--subtle);
+      line-height: 1.5;
+    }
+
+    @media (min-width: 720px) {
+      .app-shell {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .mode-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .option-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .home-hero {
+        padding-right: 108px;
+      }
+
+      .hero-badges,
+      .count-grid,
+      .voice-grid,
+      .action-row,
+      .result-grid,
+      .footer-actions,
+      .footer-actions.full {
+        grid-template-columns: 1fr;
+      }
+
+      .section,
+      .quiz-card,
+      .result-card {
+        padding: 18px 16px;
+      }
+
+      .small-button,
+      .nav-button,
+      .choice-chip {
+        min-height: 64px;
+      }
+    }
+
+    @media (hover: hover) {
+      .choice-chip:hover,
+      .mode-card:hover,
+      .small-button:hover,
+      .option-button:hover,
+      .nav-button:hover {
+        transform: translateY(-2px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app-shell"></div>
+  <script>
+    const STORAGE_KEYS = {
+      wrongBook: 'zzx_wrong_book_v1',
+      totalStars: 'zzx_total_stars_v1',
+      voiceEnabled: 'zzx_voice_enabled_v1'
+    };
+
+    const RAW_QUESTION_BANK = [
+  {
+    "id": 1,
+    "question": "社稷坛位于太庙的什么方向？",
+    "options": [
+      "A 东",
+      "B 西",
+      "C 东北",
+      "D 西南"
+    ],
+    "answer": "D",
+    "explanation": "社稷坛位于太庙的西侧，也就是西南方向，这是古代都城规划中“左祖右社”原则的体现。所谓“左祖右社”，是指皇帝面朝南站立时，左边设祖庙（太庙），右边设社稷坛。这一布局来自古代礼制，是国家制度的一部分，而不是随便安排的。\n\n太庙代表祖先，是王朝血统和延续的象征；社稷坛中的“社”是土地神，“稷”是五谷神，代表国家赖以生存的土地和粮食。也就是说，一个国家既要有祖先的传承，也要有土地和农业作为基础。\n\n北京在明清时期作为都城，严格按照这种礼制来建设，把太庙放在东边、社稷坛放在西边，体现了国家秩序在城市中的具体表达。\n\n记忆点：左祖右社——太庙在东，社稷在西。",
+    "type": "single"
+  },
+  {
+    "id": 2,
+    "question": "北京中轴线最终完成定型是在什么朝代？",
+    "options": [
+      "A 元",
+      "B 明",
+      "C 清",
+      "D 燕"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线真正完成并形成完整体系，是在明朝。虽然元代的大都已经有中轴线的雏形，但当时的结构还不够完善，也没有形成严格的礼制秩序。\n\n到了明成祖永乐年间，北京被定为首都，并进行大规模重建。紫禁城被放在中轴线中心，所有重要建筑，比如宫殿、城门、祭祀场所，都沿着南北一条直线排列。这种布局不仅整齐，还体现了“皇帝居中、天下围绕”的思想。\n\n中轴线因此不只是道路，而是一种把政治权力表现出来的方式。通过空间布局，让人一眼就能看出谁在中心。\n\n记忆点：中轴线真正成型在明朝。",
+    "type": "single"
+  },
+  {
+    "id": 3,
+    "question": "北京中轴线的起源可以追溯到哪个朝代？",
+    "options": [
+      "A 元",
+      "B 明",
+      "C 清",
+      "D 燕"
+    ],
+    "answer": "A",
+    "explanation": "北京中轴线最早可以追溯到元朝的大都城。元世祖忽必烈在建设大都时，就采用了南北对称的城市布局，并设置了一条贯穿全城的中轴线。\n\n这条中轴线当时还没有后来那么复杂，但已经起到了“城市骨架”的作用，决定了主要建筑和道路的排列方式。也就是说，北京的基本结构在元代就已经打下基础。\n\n到了明清时期，北京在元大都的基础上重建和扩展，中轴线被进一步强化，加入更多宫殿和礼制建筑，最终形成今天我们看到的完整形态。\n\n记忆点：中轴线起源于元，完善于明。",
+    "type": "single"
+  },
+  {
+    "id": 4,
+    "question": "北京中轴线一共有多少处重要节点？",
+    "options": [
+      "A 3",
+      "B 5",
+      "C 10",
+      "D 14"
+    ],
+    "answer": "D",
+    "explanation": "北京中轴线从北到南串联起14个重要节点，比如钟鼓楼、景山、故宫、天安门、前门、永定门等。这些节点不是随便排列的，而是按照等级和功能严格设计的。\n\n越靠近中轴线中心的建筑，地位越高、作用越重要。例如紫禁城位于最核心，是皇帝居住和处理国家事务的地方；天安门是重要的礼仪空间；城门则负责城市出入和防御。\n\n这种从中心向外展开的结构，体现了古代都城的秩序：最重要的在中间，其他依次展开。中轴线因此不仅是空间结构，也是政治结构。\n\n记忆点：中轴线重要节点共14个。",
+    "type": "single"
+  },
+  {
+    "id": 5,
+    "question": "系统研究北京中轴线的著名建筑学家是谁？",
+    "options": [
+      "A 胡适",
+      "B 蔡元培",
+      "C 梁思成",
+      "D 林徽因"
+    ],
+    "answer": "C",
+    "explanation": "梁思成是中国著名的建筑学家，他对北京中轴线进行了系统研究，并把这一概念清晰地总结出来。在他之前，中轴线虽然存在，但并没有被完整地当作一个整体来研究。\n\n梁思成通过实地测绘和研究，发现中轴线不仅是一条直线，而是一整套完整的城市规划体系。他指出，北京中轴线在世界城市中非常少见，是一条长度长、保存完整、结构清晰的轴线。\n\n他的研究让人们意识到，北京不仅是历史城市，更是一座经过精密设计的都城。这也为后来的保护和申遗工作提供了重要依据。\n\n记忆点：研究中轴线，要记梁思成。",
+    "type": "single"
+  },
+  {
+    "id": 6,
+    "question": "元大都城市规划的重要形成阶段是在什么时候？",
+    "options": [
+      "A 元2年",
+      "B 元3年",
+      "C 元4年",
+      "D 元7年"
+    ],
+    "answer": "B",
+    "explanation": "元大都的建设是在元世祖忽必烈时期完成的，其中城市规划的关键阶段大约在元三年前后。这一时期，北京开始从原有的地方城市转变为全国政治中心。\n\n元大都的规划非常先进，采用了南北中轴线和规则的棋盘式道路布局。城市被划分为整齐的方格，宫城位于中心位置，体现了高度理性的设计思想。\n\n这种规划方式对后来的明清北京影响非常大。明代重建北京时，并不是完全重新设计，而是在元大都的基础上进行调整和强化。\n\n也就是说，北京今天的城市骨架，其实早在元代就已经形成了。\n\n记忆点：元大都关键规划在元三年前后。",
+    "type": "single"
+  },
+  {
+    "id": 7,
+    "question": "被称为北京中轴线“生态见证者”的动物是？",
+    "options": [
+      "A 北京雨燕",
+      "B 北京兔爷",
+      "C 老虎",
+      "D 熊猫"
+    ],
+    "answer": "A",
+    "explanation": "北京雨燕是一种长期生活在古建筑中的鸟类，比如城楼、宫殿的屋檐下都能看到它们。它们每年都会回到同一个地方筑巢，与北京古建筑共同存在了很长时间。\n\n这些雨燕不仅是自然生物，也是中轴线历史延续的“见证者”。从元明清到今天，建筑在变化，但雨燕的生活方式却一直延续下来。\n\n这说明北京中轴线不仅是建筑遗产，也是一个人与自然共同存在的空间系统。古建筑不仅服务人类，也成为动物的栖息地。\n\n因此，北京雨燕常被认为是中轴线生态环境的重要象征。\n\n记忆点：中轴线的“老居民”是北京雨燕。",
+    "type": "single"
+  },
+  {
+    "id": 8,
+    "question": "钟楼与鼓楼之间的距离大约是多少？",
+    "options": [
+      "A 5",
+      "B 7",
+      "C 9",
+      "D 11"
+    ],
+    "answer": "B",
+    "explanation": "钟楼和鼓楼位于北京中轴线北端，两者之间的距离大约是7百米左右。这一距离并不是随意确定的，而是经过实际功能考虑的。\n\n在古代，钟鼓楼承担报时功能，声音需要覆盖一定范围。如果距离太远，声音传不到；如果太近，又无法有效覆盖城市空间。因此，这个距离既考虑了声学效果，也考虑了城市尺度。\n\n此外，钟鼓楼的位置也标志着城市北端的重要空间节点，是中轴线的重要组成部分。\n\n从这里往南，可以依次进入景山、故宫等核心区域。\n\n记忆点：钟鼓楼相距约7百米。",
+    "type": "single"
+  },
+  {
+    "id": 9,
+    "question": "钟鼓楼在古代的主要功能是什么？",
+    "options": [
+      "A 祭祀",
+      "B 预警",
+      "C 报时",
+      "D 传递消息"
+    ],
+    "answer": "C",
+    "explanation": "钟鼓楼最主要的功能是报时。在没有现代钟表的时代，人们无法精确掌握时间，因此需要统一的时间信号。\n\n通过敲钟和击鼓，城市居民可以知道现在是什么时辰，从而安排工作和生活。例如早晨击鼓表示一天开始，夜晚敲钟表示进入休息时间。\n\n这种制度不仅方便生活，也是一种城市管理方式。统一时间，可以让整个城市的节奏保持一致。\n\n因此，钟鼓楼不仅是建筑，更是古代城市运行的重要工具。\n\n记忆点：钟鼓楼就是古代的公共时钟。",
+    "type": "single"
+  },
+  {
+    "id": 10,
+    "question": "北京紫禁城等核心建筑建成于哪一年？",
+    "options": [
+      "A 1390年",
+      "B 1410年",
+      "C 1420年",
+      "D 1430年"
+    ],
+    "answer": "C",
+    "explanation": "1420年是北京城市建设中的重要年份，这一年紫禁城及相关重要建筑基本建成，北京正式成为明朝的都城。\n\n紫禁城位于中轴线中心，是皇帝居住和处理政务的地方。围绕它展开的，是一整套完整的城市体系，包括宫城、皇城和外城。\n\n从这一年开始，北京不仅是一个城市，更成为全国政治中心。整个国家的权力运行都以这里为核心展开。\n\n这一时间点，也标志着北京中轴线正式进入成熟阶段。\n\n记忆点：北京核心建成时间是1420年。",
+    "type": "single"
+  },
+  {
+    "id": 11,
+    "question": "钟鼓楼报时的顺序通常是？",
+    "options": [
+      "A 先敲钟",
+      "B 先敲鼓",
+      "C 同时敲"
+    ],
+    "answer": "B",
+    "explanation": "在古代报时制度中，一般是先击鼓，再敲钟。鼓声通常用于白天或开始活动的时间，而钟声多用于夜晚或重要时刻。\n\n这种顺序形成了固定的生活节奏，人们通过声音就能判断一天的进程。\n\n“晨钟暮鼓”是常见说法，但在具体操作中，鼓往往先起作用，作为开始信号。\n\n这种制度说明，古代社会已经有比较成熟的时间管理体系。\n\n记忆点：报时顺序是先鼓后钟。",
+    "type": "single"
+  },
+  {
+    "id": 12,
+    "question": "钟鼓楼报时常用多少响？",
+    "options": [
+      "A 18",
+      "B 36",
+      "C 72",
+      "D 108"
+    ],
+    "answer": "D",
+    "explanation": "钟鼓楼报时常常使用108响，这个数字在中国传统文化中具有特殊意义，代表完整和循环。\n\n108不仅用于报时，在宗教中也很常见，比如佛珠的数量也是108颗，象征人生的完整过程。\n\n因此，这个数字既有实际功能，也带有文化象征。\n\n通过固定的次数，人们可以清楚地知道时间，同时也体现出制度的稳定性。\n\n记忆点：报时次数是108响。",
+    "type": "single"
+  },
+  {
+    "id": 13,
+    "question": "中轴线附近重要的元代桥梁是哪一座？",
+    "options": [
+      "A 万宁桥",
+      "B 钟楼",
+      "C 鼓楼",
+      "D 中华门"
+    ],
+    "answer": "A",
+    "explanation": "万宁桥是元代留下来的重要桥梁，位于中轴线附近，是连接城市水系的重要节点。\n\n在古代，北京不仅依靠陆路交通，还依赖水运系统。万宁桥正是这一系统中的关键位置，船只通过这里进入城市内部。\n\n它不仅是一座桥，还与水闸等设施一起，承担调节水位和运输的功能。\n\n这说明北京在元代已经是一个交通体系完善的城市，而不是单纯的政治中心。\n\n记忆点：元代重要桥梁是万宁桥。",
+    "type": "single"
+  },
+  {
+    "id": 14,
+    "question": "中轴线水系交通的重要节点是哪一座桥？",
+    "options": [
+      "A 玉带桥",
+      "B 朝宗桥",
+      "C 万宁桥",
+      "D 通运桥"
+    ],
+    "answer": "C",
+    "explanation": "万宁桥不仅是普通桥梁，更是北京水运系统的重要节点。它连接什刹海和外部水系，是船只进入城市的重要入口。\n\n在古代，粮食、物资等大量通过水路运输，因此水运非常重要。万宁桥的位置，使它成为控制水路交通的关键点。\n\n此外，桥附近还设置了水闸，用来调节水位，使船只能够顺利通行。\n\n这说明万宁桥在城市运行中具有重要作用，不只是交通设施。\n\n记忆点：水运关键节点是万宁桥。",
+    "type": "single"
+  },
+  {
+    "id": 15,
+    "question": "万宁桥的核心功能之一是什么？",
+    "options": [
+      "A 集市市场",
+      "B 行政税收",
+      "C 闸门制水"
+    ],
+    "answer": "C",
+    "explanation": "万宁桥的重要功能之一是通过水闸控制水位。这种“闸门制水”的方式，可以让水流保持稳定，同时方便船只通行。\n\n如果水位过高或过低，船只都无法正常航行，因此需要精确调节。\n\n这种技术说明古代水利工程已经非常成熟，不仅能建桥，还能管理水流。\n\n万宁桥因此不仅是交通设施，也是水利工程的一部分。\n\n记忆点：万宁桥不仅是桥，还有水闸。",
+    "type": "single"
+  },
+  {
+    "id": 16,
+    "question": "万宁桥桥体结构通常分为几部分？",
+    "options": [
+      "A 2",
+      "B 3",
+      "C 4",
+      "D 1"
+    ],
+    "answer": "A",
+    "explanation": "万宁桥的桥体结构通常分为两个主要部分，这是一种常见的古桥设计方式。\n\n这种结构可以提高稳定性，同时方便维护。如果桥的一部分出现问题，可以单独修复，而不影响整体使用。\n\n古代工匠在设计桥梁时，不仅考虑承重，还考虑长期使用和维护。\n\n这说明古代工程技术已经具备系统化思维，而不仅是简单建造。\n\n记忆点：桥体结构一般分两部分。",
+    "type": "single"
+  },
+  {
+    "id": 17,
+    "question": "万宁桥上的镇水兽叫什么？",
+    "options": [
+      "A 趴蝮",
+      "B 螭吻",
+      "C 负屃",
+      "D 赑屃"
+    ],
+    "answer": "A",
+    "explanation": "趴蝮是一种常见的古代建筑装饰，通常出现在桥梁和水利设施上，被认为可以镇水避灾。\n\n古人认为水具有不稳定性，因此会在重要位置设置象征性的“镇水兽”，希望能带来安全。\n\n这种做法虽然带有信仰成分，但也反映出古人对自然的敬畏。\n\n趴蝮不仅是装饰，也是一种文化象征。\n\n记忆点：桥上的镇水兽叫趴蝮。",
+    "type": "single"
+  },
+  {
+    "id": 18,
+    "question": "中轴线最高点的建筑是？",
+    "options": [
+      "A 绮望楼",
+      "B 观妙亭",
+      "C 万春亭",
+      "D 寿皇殿"
+    ],
+    "answer": "C",
+    "explanation": "万春亭位于景山顶，是北京中轴线的最高点。从这里可以俯瞰整个故宫和中轴线布局。\n\n景山本身是人工堆成的山，位于紫禁城北侧，形成一个制高点。万春亭建在山顶，用于观景和空间控制。\n\n站在这里，可以清楚看到中轴线如何贯穿城市，体现出规划的整体性。\n\n因此，万春亭不仅是景观建筑，也是理解中轴线的重要位置。\n\n记忆点：中轴线最高点是万春亭。",
+    "type": "single"
+  },
+  {
+    "id": 19,
+    "question": "重要建筑常见的结构层数是几层？",
+    "options": [
+      "A 2",
+      "B 3",
+      "C 4",
+      "D 5"
+    ],
+    "answer": "B",
+    "explanation": "在古代建筑中，层数往往与等级有关。三层结构是重要建筑中常见的一种形式。\n\n层数越多，通常表示地位越高，但也要符合建筑技术条件。\n\n三层结构既能体现等级，又能保证稳定性，因此被广泛使用。\n\n这说明古代建筑不仅考虑外观，也受到制度和技术的限制。\n\n记忆点：重要建筑常见三层。",
+    "type": "single"
+  },
+  {
+    "id": 20,
+    "question": "故宫中用于举行殿试的宫殿是哪一座？",
+    "options": [
+      "A 太和门",
+      "B 中和殿",
+      "C 保和殿",
+      "D 交泰殿"
+    ],
+    "answer": "C",
+    "explanation": "保和殿是故宫三大殿之一，主要用于举行科举殿试。殿试是由皇帝亲自主持的最高级别考试，用来选拔国家官员。\n\n在科举制度中，殿试是最后一关，通过后可以进入朝廷任职，因此非常重要。\n\n把殿试安排在宫殿中举行，说明国家对人才选拔的重视，也体现了皇权对考试制度的控制。\n\n这不仅是一场考试，更是国家治理体系的一部分。\n\n记忆点：殿试在保和殿。",
+    "type": "single"
+  },
+  {
+    "id": 21,
+    "question": "景山的主要作用是什么？",
+    "options": [
+      "A 防洪",
+      "B 堆土成山作为屏障",
+      "C 农业种植",
+      "D 市场交易"
+    ],
+    "answer": "B",
+    "explanation": "景山是人工堆成的一座山，位于紫禁城北侧，它最重要的作用是作为“屏障”。在古代都城规划中，背后有山被认为是有利于安全和风水的布局。\n\n景山的土主要来自开挖护城河和宫殿地基时产生的土方。把这些土集中堆起来，一方面解决了施工问题，另一方面形成了一道天然屏障。\n\n从功能上看，景山可以防风、防御，也可以作为观察点。从文化上看，它体现了古人对“前朝后寝、背山面水”这种城市格局的重视。\n\n因此，景山既是工程产物，也是城市设计的一部分。\n\n记忆点：景山是人工堆成的“背后屏障”。",
+    "type": "single"
+  },
+  {
+    "id": 22,
+    "question": "景山位于紫禁城的哪个方向？",
+    "options": [
+      "A 东",
+      "B 西",
+      "C 南",
+      "D 北"
+    ],
+    "answer": "D",
+    "explanation": "景山位于紫禁城的正北方向，是中轴线上的重要节点之一。它紧靠宫城北侧，与故宫形成“前宫后山”的格局。\n\n这种布局不是随意安排的，而是符合古代都城规划原则。皇宫位于中心，后方有山作为依托，象征稳定与安全。\n\n同时，景山也成为观察中轴线的重要位置。从山顶可以看到整个故宫布局，这在城市规划中具有很强的控制作用。\n\n因此，景山不仅是地理位置上的北侧建筑，也是中轴线结构中的关键组成部分。\n\n记忆点：景山在故宫正北。",
+    "type": "single"
+  },
+  {
+    "id": 23,
+    "question": "紫禁城在中轴线中的位置是？",
+    "options": [
+      "A 起点",
+      "B 中心",
+      "C 终点",
+      "D 边缘"
+    ],
+    "answer": "B",
+    "explanation": "紫禁城位于北京中轴线的中心位置，是整个城市最核心的部分。这里是皇帝居住和处理国家事务的地方。\n\n在古代都城设计中，最重要的建筑一定放在轴线中心，这样可以突出其地位。紫禁城作为皇权象征，必须处于最核心的位置。\n\n围绕紫禁城向外展开，是不同等级的空间，比如皇城、外城等，这些层次反映了权力的递减。\n\n因此，中轴线不仅是空间轴线，更是权力结构的体现，而紫禁城就是这个结构的核心。\n\n记忆点：紫禁城在中轴线中心。",
+    "type": "single"
+  },
+  {
+    "id": 24,
+    "question": "天安门的主要功能是什么？",
+    "options": [
+      "A 居住",
+      "B 防御",
+      "C 礼仪与政治象征",
+      "D 商业"
+    ],
+    "answer": "C",
+    "explanation": "天安门位于中轴线的重要位置，它的主要功能是礼仪和政治象征，而不是日常居住或防御。\n\n在古代，天安门是举行重大典礼、发布重要命令的地方。皇帝通过这里向外展示权力和国家形象。\n\n从建筑形式上看，天安门规模宏大、位置突出，就是为了强化这种象征意义。\n\n因此，它不仅是一个城门，更是国家权力的展示窗口。\n\n记忆点：天安门是礼仪与权力象征。",
+    "type": "single"
+  },
+  {
+    "id": 25,
+    "question": "太和殿的主要用途是什么？",
+    "options": [
+      "A 居住",
+      "B 日常办公",
+      "C 举行重大典礼",
+      "D 存储物资"
+    ],
+    "answer": "C",
+    "explanation": "太和殿是故宫中等级最高的建筑，主要用于举行重大典礼，比如皇帝登基、大婚、册封等。\n\n这些仪式通常涉及国家权力和重要政治事件，因此需要在最庄严的场所进行。\n\n太和殿的位置在中轴线上最重要的位置之一，建筑规模最大，象征皇权的最高地位。\n\n因此，它不是日常使用的空间，而是专门用于重要场合的礼仪建筑。\n\n记忆点：重大典礼在太和殿。",
+    "type": "single"
+  },
+  {
+    "id": 26,
+    "question": "中和殿的主要作用是什么？",
+    "options": [
+      "A 仓库",
+      "B 过渡与准备",
+      "C 防御",
+      "D 市场"
+    ],
+    "answer": "B",
+    "explanation": "中和殿位于太和殿和保和殿之间，主要作用是作为仪式前的准备空间。\n\n皇帝在举行大典之前，会在这里稍作停留，调整状态，然后再进入太和殿。\n\n这种设计体现了古代礼仪的严谨性，每一步都有明确安排，而不是直接进入正式场所。\n\n中和殿因此是礼仪流程中的重要一环，连接前后空间。\n\n记忆点：中和殿是仪式前的准备空间。",
+    "type": "single"
+  },
+  {
+    "id": 27,
+    "question": "保和殿除了殿试，还用于什么？",
+    "options": [
+      "A 军事训练",
+      "B 宴会",
+      "C 商业活动",
+      "D 农业"
+    ],
+    "answer": "B",
+    "explanation": "保和殿除了举行殿试外，还用于举办重要宴会，比如节庆活动中的宴席。\n\n这些宴会通常由皇帝主持，参与者包括官员或外国使节。\n\n这说明保和殿不仅是考试场所，也是外交和政治交流的重要空间。\n\n与太和殿相比，保和殿的功能更偏向“交流”和“活动”，而不是纯粹的礼仪展示。\n\n记忆点：保和殿=殿试+宴会。",
+    "type": "single"
+  },
+  {
+    "id": 28,
+    "question": "午门在紫禁城中的作用是？",
+    "options": [
+      "A 居住",
+      "B 主入口",
+      "C 仓库",
+      "D 市场"
+    ],
+    "answer": "B",
+    "explanation": "午门是紫禁城的正门，也是最重要的入口。所有正式进入宫城的活动都要从这里经过。\n\n它不仅是通道，也是权力的象征。只有特定身份的人可以通过不同的门进入，体现严格的等级制度。\n\n例如皇帝走中门，大臣走侧门，这种差别反映了社会秩序。\n\n因此，午门不仅是入口，更是制度的一部分。\n\n记忆点：午门是紫禁城正门。",
+    "type": "single"
+  },
+  {
+    "id": 29,
+    "question": "北京中轴线长度大约是多少公里？",
+    "options": [
+      "A 10",
+      "B 12",
+      "C 13",
+      "D 15"
+    ],
+    "answer": "C",
+    "explanation": "北京中轴线全长大约13公里，从北端的钟鼓楼一直延伸到南端的永定门。\n\n这条轴线贯穿整个城市，把重要建筑串联起来，形成完整的空间结构。\n\n在世界城市中，这样长且完整的中轴线是非常少见的。\n\n它不仅体现了城市规划能力，也体现了古代政治结构的集中性。\n\n记忆点：中轴线长度约13公里。",
+    "type": "single"
+  },
+  {
+    "id": 30,
+    "question": "前门在中轴线中的功能是？",
+    "options": [
+      "A 宫殿",
+      "B 城门",
+      "C 水利",
+      "D 市场"
+    ],
+    "answer": "B",
+    "explanation": "前门是北京中轴线上的重要城门之一，主要承担城市出入口的功能。\n\n它连接内城与外部区域，是人员和物资进出的关键通道。\n\n同时，前门附近逐渐形成商业区，成为城市经济活动的重要区域。\n\n因此，前门既是交通节点，也是城市发展的起点之一。\n\n记忆点：前门是重要城门。",
+    "type": "single"
+  },
+  {
+    "id": 31,
+    "question": "永定门在中轴线中的位置是？",
+    "options": [
+      "A 起点",
+      "B 中心",
+      "C 南端",
+      "D 北端"
+    ],
+    "answer": "C",
+    "explanation": "永定门是北京中轴线的南端终点，是整条轴线的结束位置。\n\n作为城门，它不仅承担交通功能，也标志着城市空间的边界。\n\n从北到南，中轴线的结构逐渐展开，到了永定门，整个体系完成闭合。\n\n因此，永定门既是空间终点，也是结构完成的标志。\n\n记忆点：中轴线南端是永定门。",
+    "type": "single"
+  },
+  {
+    "id": 32,
+    "question": "钟楼在中轴线中的位置是？",
+    "options": [
+      "A 南端",
+      "B 中心",
+      "C 北端",
+      "D 西侧"
+    ],
+    "answer": "C",
+    "explanation": "钟楼位于北京中轴线的北端，是整个轴线的起点之一。\n\n它与鼓楼共同组成北端的时间管理系统，同时也标志着城市北部的重要节点。\n\n从钟楼向南，可以依次进入中轴线的核心区域。\n\n因此，钟楼不仅是报时设施，也是空间结构的起点。\n\n记忆点：钟楼在中轴线北端。",
+    "type": "single"
+  },
+  {
+    "id": 33,
+    "question": "鼓楼的主要功能是？",
+    "options": [
+      "A 防御",
+      "B 报时",
+      "C 居住",
+      "D 商业"
+    ],
+    "answer": "B",
+    "explanation": "鼓楼与钟楼一样，主要功能是报时，是古代城市时间管理系统的重要组成部分。\n\n通过击鼓，城市居民可以知道时间，从而安排日常活动。\n\n这种统一时间的方式，使整个城市能够有序运行。\n\n鼓楼通常与钟楼配合使用，共同完成报时任务。\n\n记忆点：鼓楼负责报时。",
+    "type": "single"
+  },
+  {
+    "id": 34,
+    "question": "景山的土主要来自哪里？",
+    "options": [
+      "A 外地运输",
+      "B 农田",
+      "C 挖护城河和宫殿地基",
+      "D 山体搬运"
+    ],
+    "answer": "C",
+    "explanation": "景山的土主要来自修建护城河和宫殿地基时挖出的土方。\n\n这些土如果不集中处理，会影响施工，因此被堆积成山。\n\n这样既解决了工程问题，又形成了新的地形结构。\n\n这说明古代城市建设具有整体规划，而不是零散操作。\n\n记忆点：景山土来自挖河和建宫。",
+    "type": "single"
+  },
+  {
+    "id": 35,
+    "question": "中轴线体现的核心思想是什么？",
+    "options": [
+      "A 自然随机",
+      "B 对称与中心",
+      "C 分散",
+      "D 商业优先"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线体现的核心思想是对称和中心。所有重要建筑围绕一条直线展开，并保持左右对称。\n\n这种布局强调“中心”的重要性，也就是皇权的中心地位。\n\n通过空间对称，让城市结构清晰、秩序明确。\n\n这不仅是美学设计，更是政治思想的体现。\n\n记忆点：中轴线核心是对称与中心。",
+    "type": "single"
+  },
+  {
+    "id": 36,
+    "question": "太庙的主要作用是什么？",
+    "options": [
+      "A 商业",
+      "B 祭祀祖先",
+      "C 防御",
+      "D 居住"
+    ],
+    "answer": "B",
+    "explanation": "太庙是用来祭祀皇室祖先的地方，是古代宗庙制度的重要组成部分。\n\n通过祭祀祖先，皇帝可以强调自己的正统地位和家族延续。\n\n这种制度在古代政治中非常重要，因为统治的合法性往往与血统有关。\n\n因此，太庙不仅是宗教场所，也是政治象征。\n\n记忆点：太庙用于祭祖。",
+    "type": "single"
+  },
+  {
+    "id": 37,
+    "question": "社稷坛的主要意义是什么？",
+    "options": [
+      "A 商业",
+      "B 土地与粮食",
+      "C 军事",
+      "D 娱乐"
+    ],
+    "answer": "B",
+    "explanation": "社稷坛代表的是土地和粮食，是国家生存的基础。\n\n“社”指土地神，“稷”指五谷神，合在一起表示国家的物质基础。\n\n皇帝会在这里举行祭祀仪式，祈求国家稳定和农业丰收。\n\n这说明农业在古代国家中占有核心地位。\n\n记忆点：社稷代表土地和粮食。",
+    "type": "single"
+  },
+  {
+    "id": 38,
+    "question": "中轴线为什么重要？",
+    "options": [
+      "A 好看",
+      "B 交通",
+      "C 表现国家秩序",
+      "D 娱乐"
+    ],
+    "answer": "C",
+    "explanation": "中轴线的重要性在于它表现了国家的秩序，而不仅仅是美观或交通功能。\n\n通过一条南北轴线，把最重要的建筑按顺序排列，可以清楚地表达权力结构。\n\n谁在中心、谁在外围，都一目了然。\n\n因此，中轴线是一种把政治制度“画在地面上的方式”。\n\n记忆点：中轴线是国家秩序的体现。",
+    "type": "single"
+  },
+  {
+    "id": 39,
+    "question": "中轴线布局的特点是？",
+    "options": [
+      "A 随机",
+      "B 对称",
+      "C 弯曲",
+      "D 分散"
+    ],
+    "answer": "B",
+    "explanation": "中轴线布局的最大特点是对称。轴线两侧的建筑基本保持左右一致。\n\n这种对称不仅让城市整齐，也体现了秩序和规则。\n\n在古代，这种规则代表国家稳定。\n\n因此，对称不仅是设计方法，也是政治表达。\n\n记忆点：中轴线=对称布局。",
+    "type": "single"
+  },
+  {
+    "id": 40,
+    "question": "北京中轴线贯穿城市的方向是？",
+    "options": [
+      "A 东西",
+      "B 南北",
+      "C 东南",
+      "D 西北"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线贯穿城市的方向是南北。这是古代都城设计中的基本原则。\n\n南北方向被认为是最重要的方向，因为皇帝面南而坐，象征治理天下。\n\n所有重要建筑沿南北排列，可以形成清晰的空间秩序。\n\n因此，中轴线不仅是方向问题，也是文化和制度的体现。\n\n记忆点：中轴线是南北方向。",
+    "type": "single"
+  },
+  {
+    "id": 41,
+    "question": "故宫又被称为什么？",
+    "options": [
+      "A 皇宫",
+      "B 紫禁城",
+      "C 京城",
+      "D 王城"
+    ],
+    "answer": "B",
+    "explanation": "故宫在明清时期被称为“紫禁城”。“紫”指的是紫微星，在古代被认为是天帝居住的地方；“禁”表示禁止进入，普通人不能随便进入；“城”则说明它是一个封闭的城池。\n\n这个名字其实表达了一种思想：皇帝被认为是“天子”，他的居所就像天上的宫殿一样神圣。普通百姓不能进入，体现出严格的等级制度。\n\n紫禁城不仅是居住的地方，更是权力的中心。国家的重要决策、仪式和管理活动，都在这里进行。\n\n因此，“紫禁城”这个名字，本身就代表了皇权的地位和古代社会的等级秩序。\n\n记忆点：紫禁城=天子的禁地。",
+    "type": "single"
+  },
+  {
+    "id": 42,
+    "question": "紫禁城位于中轴线的哪个位置？",
+    "options": [
+      "A 起点",
+      "B 中心",
+      "C 南端",
+      "D 北端"
+    ],
+    "answer": "B",
+    "explanation": "紫禁城位于北京中轴线的中心位置，是整个城市最重要的部分。在古代都城规划中，最核心的建筑必须放在轴线中间，这样可以突出它的地位。\n\n紫禁城是皇帝居住和处理国家事务的地方，相当于整个国家的“中枢”。围绕它向外展开的，是不同层级的空间，比如皇城、内城和外城。\n\n这种从中心向外逐渐展开的结构，体现了古代社会的等级制度：中心最高，越往外等级越低。\n\n因此，紫禁城在中轴线中心，不只是位置问题，而是权力结构的体现。\n\n记忆点：紫禁城=中轴线核心。",
+    "type": "single"
+  },
+  {
+    "id": 43,
+    "question": "北京中轴线的北端终点是哪里？",
+    "options": [
+      "A 景山",
+      "B 鼓楼",
+      "C 钟楼",
+      "D 太和殿"
+    ],
+    "answer": "C",
+    "explanation": "北京中轴线的北端终点是钟楼。它与鼓楼相邻，但在位置上，钟楼更靠北，是整条中轴线的最北端。\n\n钟楼不仅是报时建筑，也是城市空间的一个重要标志。从这里开始，向南可以进入整个中轴线体系，包括故宫、天安门等重要区域。\n\n在古代，城市的边界和重要节点往往通过这种建筑来标示。钟楼的存在，使人们清楚地知道城市结构的起点。\n\n因此，钟楼不仅有功能意义，也有空间意义。\n\n记忆点：中轴线北端是钟楼。",
+    "type": "single"
+  },
+  {
+    "id": 44,
+    "question": "北京中轴线的南端终点是哪里？",
+    "options": [
+      "A 前门",
+      "B 天安门",
+      "C 永定门",
+      "D 午门"
+    ],
+    "answer": "C",
+    "explanation": "北京中轴线的南端终点是永定门，它是外城的重要城门，也是中轴线的结束位置。\n\n从北端的钟楼一直延伸到永定门，中轴线贯穿整个城市，把所有重要节点连接起来。\n\n永定门不仅是交通通道，也象征着城市的边界。通过这里，人们可以进入或离开都城。\n\n在古代城市中，城门不仅有防御作用，也具有象征意义，代表城市的整体结构。\n\n因此，永定门是中轴线的终点，也是空间结构的完成标志。\n\n记忆点：南端终点是永定门。",
+    "type": "single"
+  },
+  {
+    "id": 45,
+    "question": "景山是如何形成的？",
+    "options": [
+      "A 自然形成",
+      "B 火山",
+      "C 人工堆土",
+      "D 河流冲积"
+    ],
+    "answer": "C",
+    "explanation": "景山是一座人工堆成的山，并不是自然形成的。它的土主要来自修建紫禁城和挖护城河时产生的土方。\n\n这些土如果不集中处理，会影响施工，因此被统一堆积起来，形成一座山。这种做法既解决了工程问题，又改善了城市布局。\n\n景山位于紫禁城北侧，还起到了“屏障”的作用。在古代，人们认为背后有山更有安全感，也符合风水观念。\n\n因此，景山既是工程产物，也是城市规划的一部分。\n\n记忆点：景山是人工堆出来的。",
+    "type": "single"
+  },
+  {
+    "id": 46,
+    "question": "天安门在中轴线中的位置属于？",
+    "options": [
+      "A 中心",
+      "B 北端",
+      "C 南部重要节点",
+      "D 城外"
+    ],
+    "answer": "C",
+    "explanation": "天安门位于中轴线中段偏南的位置，是连接皇城与外部空间的重要节点。\n\n它的作用不仅是通行，更是举行国家仪式的场所。在古代，很多重要典礼都会在这里进行。\n\n从空间上看，天安门位于皇权中心向外延伸的关键位置，是连接内外的重要“过渡点”。\n\n因此，它既属于中轴线体系的一部分，又承担礼仪和政治展示的功能。\n\n记忆点：天安门是中轴线的重要节点。",
+    "type": "single"
+  },
+  {
+    "id": 47,
+    "question": "故宫三大殿不包括哪一座？",
+    "options": [
+      "A 太和殿",
+      "B 中和殿",
+      "C 保和殿",
+      "D 交泰殿"
+    ],
+    "answer": "D",
+    "explanation": "故宫三大殿指的是太和殿、中和殿和保和殿，它们都位于中轴线上，是最重要的礼仪建筑。\n\n太和殿用于重大典礼，中和殿用于仪式准备，保和殿用于殿试和宴会。\n\n交泰殿虽然也在故宫中，但它位于内廷，是皇后使用的空间，不属于三大殿。\n\n因此，三大殿主要是用于国家层面的活动，而不是日常生活空间。\n\n记忆点：三大殿是太和、中和、保和。",
+    "type": "single"
+  },
+  {
+    "id": 48,
+    "question": "太和殿在三大殿中的地位是？",
+    "options": [
+      "A 最低",
+      "B 中间",
+      "C 最高",
+      "D 不重要"
+    ],
+    "answer": "C",
+    "explanation": "太和殿是故宫三大殿中等级最高的建筑，也是整个紫禁城中最重要的殿宇之一。\n\n它位于中轴线上最显著的位置，规模最大，用于举行最重要的国家典礼，比如皇帝登基和重大庆典。\n\n从建筑形式上看，太和殿屋顶等级最高，装饰最丰富，体现了最高权力的象征。\n\n因此，它不仅是建筑，也是权力的体现。\n\n记忆点：太和殿是等级最高的殿。",
+    "type": "single"
+  },
+  {
+    "id": 49,
+    "question": "中轴线体现了哪种城市设计思想？",
+    "options": [
+      "A 随机布局",
+      "B 对称与中心",
+      "C 自然发展",
+      "D 分散结构"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线体现的是“对称与中心”的设计思想。所有重要建筑沿一条南北线排列，并在两侧保持对称。\n\n这种布局让城市结构清晰，也让人一眼就能看出中心在哪里。\n\n在古代，这种“中心”通常就是皇权所在的位置，也就是紫禁城。\n\n因此，对称不仅是美观的设计，更是一种政治表达方式。\n\n记忆点：中轴线=对称+中心。",
+    "type": "single"
+  },
+  {
+    "id": 50,
+    "question": "北京中轴线的方向是？",
+    "options": [
+      "A 东西",
+      "B 南北",
+      "C 东南",
+      "D 西北"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线是南北方向的，这种布局符合古代都城设计的基本原则。\n\n皇帝通常面朝南，象征治理天下，因此城市的重要建筑也沿南北排列。\n\n这种方向不仅有文化意义，也方便形成清晰的城市结构。\n\n因此，中轴线不仅是地理方向，更是制度和文化的体现。\n\n记忆点：中轴线方向是南北。",
+    "type": "single"
+  },
+  {
+    "id": 51,
+    "question": "皇城在北京城市结构中的作用是？",
+    "options": [
+      "A 商业区",
+      "B 居民区",
+      "C 保护和服务宫城",
+      "D 农业区"
+    ],
+    "answer": "C",
+    "explanation": "皇城是围绕紫禁城的一圈区域，它的主要作用是保护和服务宫城。紫禁城是皇帝居住和处理政务的地方，而皇城则是它的外围防护层。\n\n在皇城内，有大量为宫廷服务的机构，比如官署、仓库、御用作坊等。这些设施不能直接放在紫禁城内部，但又必须靠近皇帝，因此被安排在皇城范围内。\n\n从城市结构来看，北京是“层层包围”的结构：最内层是紫禁城，其外是皇城，再往外是内城和外城。这种结构体现了严格的等级制度和安全考虑。\n\n因此，皇城既是保护区，也是功能区，是连接宫城与城市的重要过渡层。\n\n记忆点：皇城是宫城的保护层和服务层。",
+    "type": "single"
+  },
+  {
+    "id": 52,
+    "question": "正阳门箭楼的屋顶形式是？",
+    "options": [
+      "A 庑殿顶",
+      "B 重檐歇山顶",
+      "C 悬山顶",
+      "D 硬山顶"
+    ],
+    "answer": "B",
+    "explanation": "正阳门箭楼采用的是“重檐歇山顶”，这是中国古代建筑中等级较高的一种屋顶形式。“重檐”表示有两层屋檐，“歇山顶”则是结合了四坡和人字形的结构。\n\n这种屋顶形式通常用于重要建筑，因为它既稳固，又具有较强的视觉效果，能够体现建筑的地位。\n\n正阳门是北京中轴线南段的重要城门，其箭楼不仅用于防御，也具有象征意义。因此，采用高等级屋顶形式，可以突出它在城市中的重要性。\n\n屋顶形式在古代并不是随意选择的，而是严格对应等级制度的。\n\n记忆点：重要城楼常用重檐歇山顶。",
+    "type": "single"
+  },
+  {
+    "id": 53,
+    "question": "北京城门在中轴线体系中的作用主要是？",
+    "options": [
+      "A 装饰",
+      "B 城市边界与通道",
+      "C 娱乐",
+      "D 居住"
+    ],
+    "answer": "B",
+    "explanation": "北京的城门在中轴线体系中主要承担两个作用：一是作为城市的边界，二是作为出入通道。\n\n城门不仅是交通节点，也是城市结构的标志。通过城门，可以清楚地知道哪里是城市内部，哪里是外部。\n\n同时，不同城门还有不同功能，比如正阳门是主要进出通道，而其他城门可能承担军事或区域交通功能。\n\n在中轴线上，城门的排列也体现了从中心向外逐级展开的结构，使城市空间有清晰的层次。\n\n因此，城门既是交通设施，也是空间秩序的一部分。\n\n记忆点：城门=边界+通道。",
+    "type": "single"
+  },
+  {
+    "id": 54,
+    "question": "中轴线建筑排列的基本原则是？",
+    "options": [
+      "A 随机",
+      "B 按等级排列",
+      "C 按大小排列",
+      "D 按时间排列"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线上的建筑并不是随意排列的，而是严格按照等级来安排。等级越高的建筑，越靠近中心位置。\n\n例如，紫禁城在最核心位置，属于最高等级；太和殿是最高礼仪建筑；城门则位于外围。\n\n这种排列方式反映了古代社会的等级制度。空间位置越重要，代表权力越大。\n\n因此，中轴线不仅是建筑排列，更是一种把社会结构“空间化”的方式。\n\n通过观察建筑位置，就能大致判断它的地位。\n\n记忆点：中轴线按等级排列。",
+    "type": "single"
+  },
+  {
+    "id": 55,
+    "question": "哪一版《北京市城市总体规划》首次提出中轴线向南延伸？",
+    "options": [
+      "A 2004年",
+      "B 2010年",
+      "C 2016年",
+      "D 2020年"
+    ],
+    "answer": "C",
+    "explanation": "2016年版的《北京市城市总体规划》中，首次明确提出将中轴线向南延伸到大兴机场和永定河水系。\n\n这说明中轴线不再只是历史概念，而是被纳入现代城市规划中，继续发挥作用。\n\n通过延伸中轴线，可以在新城区中保持城市结构的连续性，让历史与现代连接起来。\n\n这也是文化遗产保护的一种方式：不仅保护旧建筑，还要让它在现代城市中继续发挥影响。\n\n因此，中轴线从历史遗产变成了现代规划的一部分。\n\n记忆点：中轴线南延首次提出在2016年规划。",
+    "type": "single"
+  },
+  {
+    "id": 56,
+    "question": "北京中轴线的设计体现了哪种权力特点？",
+    "options": [
+      "A 分散",
+      "B 集中",
+      "C 平等",
+      "D 随机"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线最重要的特点之一，是体现了权力的集中。所有重要建筑都围绕一条轴线展开，并以紫禁城为中心。\n\n这种布局让城市结构非常清晰：中心是皇权，其它空间围绕它展开。\n\n在古代中国，皇帝是国家最高统治者，这种集中布局正好反映了这种政治制度。\n\n通过城市设计，把权力结构变成可见的空间形式，是中轴线最重要的意义之一。\n\n记忆点：中轴线体现权力集中。",
+    "type": "single"
+  },
+  {
+    "id": 57,
+    "question": "古代都城为什么强调中轴线？",
+    "options": [
+      "A 美观",
+      "B 方便建造",
+      "C 表达秩序和权威",
+      "D 节省空间"
+    ],
+    "answer": "C",
+    "explanation": "古代都城强调中轴线，最主要的原因是表达秩序和权威。通过一条清晰的轴线，可以把城市组织得井然有序。\n\n中轴线不仅让建筑排列整齐，还让人一进入城市，就能感受到中心在哪里、谁最重要。\n\n这种空间设计，其实是在表达政治思想：权力有中心，社会有等级。\n\n因此，中轴线既是规划方法，也是文化和制度的体现。\n\n记忆点：中轴线是秩序和权威的表现。",
+    "type": "single"
+  },
+  {
+    "id": 58,
+    "question": "中轴线对城市发展的作用是？",
+    "options": [
+      "A 阻碍",
+      "B 组织结构",
+      "C 随机影响",
+      "D 无作用"
+    ],
+    "answer": "B",
+    "explanation": "中轴线在城市中起到“组织结构”的作用。它像一根主线，把不同功能区域连接起来。\n\n在北京，中轴线把宫城、礼仪空间、城门等重要节点串联起来，使城市结构清晰。\n\n即使在现代城市发展中，中轴线仍然可以作为规划参考，使城市扩展更加有序。\n\n因此，中轴线不仅是历史遗产，也是城市结构的重要基础。\n\n记忆点：中轴线是城市骨架。",
+    "type": "single"
+  },
+  {
+    "id": 59,
+    "question": "北京中轴线体现了哪种文化特点？",
+    "options": [
+      "A 随机",
+      "B 对称",
+      "C 混乱",
+      "D 自由"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线最明显的特点是对称。轴线两侧的建筑在布局上基本保持一致。\n\n这种对称不仅让城市看起来整齐，也体现了古人对“平衡”和“秩序”的追求。\n\n在古代文化中，对称往往代表稳定和合理，因此被广泛应用在建筑和城市设计中。\n\n因此，中轴线的对称布局不仅是设计方法，也是文化观念的体现。\n\n记忆点：中轴线强调对称。",
+    "type": "single"
+  },
+  {
+    "id": 60,
+    "question": "中轴线为什么能成为世界遗产？",
+    "options": [
+      "A 面积大",
+      "B 历史完整且结构清晰",
+      "C 人多",
+      "D 商业发达"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线之所以能够成为世界遗产，是因为它具有完整的历史结构和清晰的城市规划体系。\n\n从元代到明清，再到今天，中轴线一直存在，并且核心结构没有改变。这种连续性在世界上非常少见。\n\n同时，中轴线把政治、礼仪、居住和城市功能结合在一起，形成一个整体系统。\n\n正是这种“完整性”和“连续性”，让它具有很高的历史价值。\n\n因此，它不仅是中国的文化遗产，也是世界的重要遗产。\n\n记忆点：中轴线价值在于完整与连续。",
+    "type": "single"
+  },
+  {
+    "id": 61,
+    "question": "永定门在历史上被拆除的时间是？",
+    "options": [
+      "A 1957年",
+      "B 1966年",
+      "C 1949年",
+      "D 1978年"
+    ],
+    "answer": "A",
+    "explanation": "永定门是北京中轴线南端的重要城门，但在1957年被拆除。这一时期，中国正处于城市快速发展的阶段，很多传统城墙和城门被认为影响交通和城市扩展，因此被拆除。\n\n当时的主要考虑是城市现代化建设，需要更宽的道路和更方便的交通系统。由于城门占据重要位置，成为改造的重点对象。\n\n后来，人们逐渐认识到这些古建筑的历史价值，因此在2004年对永定门进行了重建。虽然现在看到的是复建建筑，但它仍然代表了中轴线结构的完整性。\n\n这一变化说明，人们对文化遗产的认识是不断发展的。\n\n记忆点：永定门1957年被拆，后来重建。",
+    "type": "single"
+  },
+  {
+    "id": 62,
+    "question": "北京中轴线在现代城市中的意义主要是？",
+    "options": [
+      "A 仅供旅游",
+      "B 无实际作用",
+      "C 文化与规划双重价值",
+      "D 商业开发"
+    ],
+    "answer": "C",
+    "explanation": "在现代城市中，北京中轴线不仅是历史遗产，还具有城市规划的参考价值。\n\n一方面，它是文化象征，代表北京的历史和传统；另一方面，它仍然可以作为城市结构的参考，使城市发展保持一定的秩序。\n\n例如，在新的城市规划中，会考虑中轴线的延续性，让新区域与旧城市形成联系。\n\n因此，中轴线既是文化遗产，也是现代城市发展的重要参考。\n\n记忆点：中轴线=历史+规划。",
+    "type": "single"
+  },
+  {
+    "id": 63,
+    "question": "中轴线上的建筑排列体现了什么关系？",
+    "options": [
+      "A 随机关系",
+      "B 等级关系",
+      "C 商业关系",
+      "D 娱乐关系"
+    ],
+    "answer": "B",
+    "explanation": "中轴线上的建筑排列体现的是严格的等级关系。越靠近中心的位置，建筑等级越高，功能越重要。\n\n例如，紫禁城位于中心，代表最高权力；太和殿是最高等级的礼仪建筑；城门则位于外围。\n\n这种排列方式不是随意的，而是根据古代社会的等级制度设计的。\n\n通过空间安排，可以直接反映出社会结构。\n\n记忆点：位置越中心，等级越高。",
+    "type": "single"
+  },
+  {
+    "id": 64,
+    "question": "永定门被拆除的原因主要是？",
+    "options": [
+      "A 战争",
+      "B 城市发展",
+      "C 自然灾害",
+      "D 经济问题"
+    ],
+    "answer": "B",
+    "explanation": "永定门被拆除的主要原因是城市发展需求。在20世纪中期，北京开始进行现代化改造，需要拓宽道路、增加交通容量。\n\n传统城门虽然具有历史价值，但在当时被认为影响交通，因此被拆除。\n\n这种情况在很多城市都发生过，是现代化过程中常见的现象。\n\n后来，人们逐渐意识到文化遗产的重要性，才开始进行保护和重建。\n\n这说明城市发展与历史保护之间需要平衡。\n\n记忆点：拆除原因是城市发展。",
+    "type": "single"
+  },
+  {
+    "id": 65,
+    "question": "北京中轴线体现了哪种传统文化思想？",
+    "options": [
+      "A 随机",
+      "B 天人合一与秩序",
+      "C 商业优先",
+      "D 自由发展"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线体现了“天人合一”和秩序的思想。古人认为，城市布局应该与自然和宇宙秩序相协调。\n\n中轴线的南北方向、对称布局，以及中心位置的安排，都反映了这种观念。\n\n同时，这种布局也体现了社会秩序，把权力、空间和文化结合在一起。\n\n因此，中轴线不仅是建筑设计，也是文化思想的表达。\n\n记忆点：中轴线体现天人合一与秩序。",
+    "type": "single"
+  },
+  {
+    "id": 66,
+    "question": "中轴线两侧建筑的特点是？",
+    "options": [
+      "A 不规则",
+      "B 对称",
+      "C 随机",
+      "D 分散"
+    ],
+    "answer": "B",
+    "explanation": "中轴线两侧的建筑通常是对称排列的。这种对称不仅让城市整齐，还体现了秩序和规则。\n\n在古代文化中，对称代表平衡和稳定，因此被广泛应用。\n\n通过对称布局，可以让人一眼看出中心位置，也方便组织空间。\n\n因此，对称不仅是美学原则，也是制度表达。\n\n记忆点：中轴线两侧对称。",
+    "type": "single"
+  },
+  {
+    "id": 67,
+    "question": "故宫所在区域属于哪一层城市结构？",
+    "options": [
+      "A 外城",
+      "B 内城",
+      "C 皇城与宫城",
+      "D 商业区"
+    ],
+    "answer": "C",
+    "explanation": "故宫位于宫城，是整个城市结构中最核心的一层，同时它也被皇城包围。\n\n北京的城市结构是分层的：最内层是宫城，其外是皇城，再外是内城和外城。\n\n这种分层体现了等级制度，也提高了安全性。\n\n宫城是权力中心，皇城是服务和保护区域。\n\n因此，故宫所在区域属于皇城与宫城体系。\n\n记忆点：故宫属于宫城核心。",
+    "type": "single"
+  },
+  {
+    "id": 68,
+    "question": "中轴线在城市中的作用类似于什么？",
+    "options": [
+      "A 装饰线",
+      "B 骨架",
+      "C 边界",
+      "D 随机路径"
+    ],
+    "answer": "B",
+    "explanation": "中轴线在城市中的作用类似于“骨架”。它决定了城市的基本结构，使各个部分有序连接。\n\n就像人体需要骨架支撑一样，城市也需要主线来组织空间。\n\n在北京，中轴线把重要建筑串联起来，使城市布局清晰。\n\n即使在现代城市发展中，这种结构仍然有参考意义。\n\n记忆点：中轴线是城市骨架。",
+    "type": "single"
+  },
+  {
+    "id": 69,
+    "question": "北京中轴线的特点是？",
+    "options": [
+      "A 短且复杂",
+      "B 长且完整",
+      "C 随机",
+      "D 分散"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线的最大特点是“长且完整”。从元代到今天，这条轴线一直存在，并保持基本结构不变。\n\n它贯穿城市南北，把多个重要节点连接起来，是世界上少见的完整中轴线。\n\n这种连续性说明，北京在发展过程中保持了基本格局。\n\n因此，中轴线不仅长，而且保存完整，具有重要价值。\n\n记忆点：中轴线长且完整。",
+    "type": "single"
+  },
+  {
+    "id": 70,
+    "question": "中轴线的核心功能是？",
+    "options": [
+      "A 娱乐",
+      "B 组织城市结构",
+      "C 商业",
+      "D 农业"
+    ],
+    "answer": "B",
+    "explanation": "中轴线的核心功能是组织城市结构。通过一条主线，把不同功能区域连接起来，使城市有序发展。\n\n在北京，中轴线连接宫城、城门、礼仪空间等重要节点。\n\n这种结构让城市清晰、有层次，而不是混乱分布。\n\n因此，中轴线是城市规划的核心工具。\n\n记忆点：中轴线用来组织城市。",
+    "type": "single"
+  },
+  {
+    "id": 71,
+    "question": "北京中轴线贯穿的核心区域主要属于什么功能？",
+    "options": [
+      "A 农业区",
+      "B 政治与礼仪区",
+      "C 工业区",
+      "D 娱乐区"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线贯穿的核心区域，主要是政治和礼仪功能区，而不是普通生活或生产区域。沿着中轴线分布的建筑，如紫禁城、太和殿、天安门等，都是与国家权力和重要仪式相关的空间。\n\n在古代，都城并不是随意发展的，而是有明确功能分区的。最重要的政治空间必须集中在一条清晰的轴线上，这样可以突出中心地位，同时方便组织大型典礼活动。\n\n这些礼仪活动，比如登基、册封、朝会等，都是国家最重要的政治行为。因此，中轴线本质上是“国家权力运行的空间通道”。\n\n普通居民区和商业区则分布在轴线之外，这也体现了功能分离的设计思想。\n\n记忆点：中轴线是政治与礼仪的核心区域。",
+    "type": "single"
+  },
+  {
+    "id": 72,
+    "question": "为什么中轴线建筑要沿一条直线排列？",
+    "options": [
+      "A 节省土地",
+      "B 表达秩序和权威",
+      "C 方便建造",
+      "D 随机选择"
+    ],
+    "answer": "B",
+    "explanation": "中轴线建筑沿一条直线排列，最重要的目的不是节省空间，而是表达秩序和权威。通过一条清晰的直线，把最重要的建筑依次排列，可以让人一进入城市就感受到一种“有中心、有秩序”的结构。\n\n在古代社会，皇帝是最高权力的象征，因此必须通过空间来体现这种地位。中轴线越笔直、越清晰，就越能突出这种中心感。\n\n此外，直线排列也方便组织大型仪式，比如朝会、阅兵等活动，都需要一个明确的轴线来进行。\n\n因此，中轴线不仅是设计选择，更是政治表达方式。\n\n记忆点：一条直线是为了突出秩序和权威。",
+    "type": "single"
+  },
+  {
+    "id": 73,
+    "question": "中轴线上的建筑为什么等级不同？",
+    "options": [
+      "A 随机",
+      "B 设计需要",
+      "C 体现社会等级制度",
+      "D 节省成本"
+    ],
+    "answer": "C",
+    "explanation": "中轴线上的建筑之所以等级不同，是为了体现古代社会的等级制度。在古代中国，社会结构是分层的，权力和地位有严格区分。\n\n这种区分不仅体现在身份上，也体现在建筑上。例如，太和殿是最高等级的建筑，用于国家重大典礼；而城门或其他建筑则等级较低。\n\n通过建筑的大小、位置、屋顶形式等差别，可以直观地看出等级关系。这种做法让城市空间本身就成为制度的体现。\n\n因此，中轴线不仅排列建筑，也在“展示等级”。\n\n记忆点：建筑等级就是社会等级的体现。",
+    "type": "single"
+  },
+  {
+    "id": 74,
+    "question": "北京最古老的商业街是哪里？",
+    "options": [
+      "A 南锣鼓巷",
+      "B 王府井",
+      "C 烟袋斜街",
+      "D 前门大街"
+    ],
+    "answer": "C",
+    "explanation": "烟袋斜街是北京最古老的商业街之一，位于什刹海附近。它形成于元代，至今已有几百年历史。\n\n这条街最初是水运和商业结合的区域，因为附近有水路运输，货物可以方便进入城市，因此逐渐形成商业活动。\n\n街道呈斜形，像一只烟袋，因此得名“烟袋斜街”。在历史上，这里聚集了很多手工艺人和商铺，是典型的老北京商业街。\n\n与中轴线相比，这类街道代表的是城市的生活和经济部分，是对“政治轴线”的一种补充。\n\n记忆点：最老商业街是烟袋斜街。",
+    "type": "single"
+  },
+  {
+    "id": 75,
+    "question": "中轴线周边的商业区一般位于哪里？",
+    "options": [
+      "A 轴线中心",
+      "B 宫殿内部",
+      "C 轴线两侧",
+      "D 城外"
+    ],
+    "answer": "C",
+    "explanation": "中轴线周边的商业区通常位于轴线两侧，而不会占据轴线本身。因为中轴线是政治和礼仪空间，不适合进行日常商业活动。\n\n商业区需要交通便利、人流集中，因此通常分布在靠近但不直接占据中轴线的位置。例如前门附近就逐渐发展成重要商业区。\n\n这种布局体现了古代城市的功能分区：中轴线用于权力和礼仪，两侧则承担生活和经济功能。\n\n因此，商业与政治空间是分开的，但又相互依存。\n\n记忆点：商业在轴线两侧，不在轴线上。",
+    "type": "single"
+  },
+  {
+    "id": 76,
+    "question": "中轴线为什么能够长期保持不变？",
+    "options": [
+      "A 没有人改变",
+      "B 结构合理且意义重要",
+      "C 交通原因",
+      "D 随机"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线能够长期保持不变，主要原因是它的结构非常合理，同时具有重要的文化和政治意义。\n\n从结构上看，中轴线清晰地组织了城市空间，使城市发展有序进行。从意义上看，它代表国家权力和文化传统，因此不容易被随意改变。\n\n即使在城市扩展过程中，人们也会尽量保留中轴线，并在新规划中延续它的方向。\n\n这说明中轴线不仅是历史遗产，也是城市发展的基础。\n\n记忆点：中轴线稳定因为结构合理、意义重大。",
+    "type": "single"
+  },
+  {
+    "id": 77,
+    "question": "中轴线上的建筑为什么大多面向南？",
+    "options": [
+      "A 风大",
+      "B 光照",
+      "C 传统礼制",
+      "D 随机"
+    ],
+    "answer": "C",
+    "explanation": "中轴线上的建筑大多面向南，这是古代礼制的要求。在中国传统文化中，南方被认为是光明、温暖的方向。\n\n皇帝面朝南坐，被称为“南面而治”，象征治理天下。因此，重要建筑也按照这一方向设计。\n\n这种朝向不仅符合文化观念，也有实际好处，比如采光更好。\n\n因此，面南不仅是实用选择，更是制度和文化的体现。\n\n记忆点：面南是礼制要求。",
+    "type": "single"
+  },
+  {
+    "id": 78,
+    "question": "中轴线对北京城市形态的影响是？",
+    "options": [
+      "A 很小",
+      "B 决定性",
+      "C 无影响",
+      "D 随机"
+    ],
+    "answer": "B",
+    "explanation": "中轴线对北京城市形态具有决定性影响。整个城市的布局，都是围绕这条轴线展开的。\n\n无论是宫城、城门，还是道路系统，都与中轴线有直接关系。\n\n如果没有这条轴线，北京的结构会完全不同，可能会变得更加分散和不规则。\n\n因此，中轴线不仅是一个组成部分，而是决定整体形态的关键因素。\n\n记忆点：中轴线决定城市结构。",
+    "type": "single"
+  },
+  {
+    "id": 79,
+    "question": "中轴线体现的最核心价值是什么？",
+    "options": [
+      "A 美观",
+      "B 交通",
+      "C 制度与文化表达",
+      "D 娱乐"
+    ],
+    "answer": "C",
+    "explanation": "中轴线最核心的价值在于表达制度和文化，而不仅仅是美观或交通。\n\n通过空间布局，把权力结构、礼制规则和文化观念表现出来，是中轴线的关键作用。\n\n例如，谁在中心、谁在外围，建筑如何排列，都体现了制度安排。\n\n因此，中轴线是一种“用空间表达思想”的方式。\n\n记忆点：中轴线是制度与文化的表达。",
+    "type": "single"
+  },
+  {
+    "id": 80,
+    "question": "北京中轴线在世界城市中的地位是？",
+    "options": [
+      "A 普通",
+      "B 独特且重要",
+      "C 无价值",
+      "D 不完整"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线在世界城市中具有独特而重要的地位。它不仅长度长，而且结构完整，历史延续时间也非常久。\n\n很多城市虽然也有主轴，但往往在发展过程中被打断或改变。而北京中轴线从元代到今天，一直保持基本形态。\n\n同时，它把政治、礼仪和城市功能结合在一起，形成一个完整体系。\n\n因此，它不仅是中国的文化遗产，也是世界城市规划史中的重要案例。\n\n记忆点：中轴线在世界上独特且重要。",
+    "type": "single"
+  },
+  {
+    "id": 81,
+    "question": "“致美楼”原本属于哪一类老北京餐饮体系？",
+    "options": [
+      "A 八大堂",
+      "B 八大楼",
+      "C 八大居",
+      "D 八大坊"
+    ],
+    "answer": "B",
+    "explanation": "在老北京的餐饮体系中，有“八大堂、八大居、八大楼”等等级划分，这是一种行业内部形成的评价体系。不同类别代表不同档次和服务水平。\n\n“致美楼”原本是一家点心铺，属于较低等级的餐饮类型，但后来通过经营和品质提升，逐渐发展壮大，最终跻身“八大楼”行列。\n\n这说明在传统社会中，虽然等级制度存在，但商业领域仍然有一定的流动空间。只要经营得当，也可以实现“升级”。\n\n因此，这道题不仅是餐饮知识，也反映了城市商业发展的变化。\n\n记忆点：致美楼从点心铺升级为八大楼。",
+    "type": "single"
+  },
+  {
+    "id": 82,
+    "question": "什刹海荷花市场牌楼匾额是谁题写的？",
+    "options": [
+      "A 启功",
+      "B 郭沫若",
+      "C 齐白石",
+      "D 徐悲鸿"
+    ],
+    "answer": "A",
+    "explanation": "什刹海荷花市场牌楼上的匾额由著名书法家启功题写。启功是现代著名学者和书法家，其书法风格清秀、规范，被广泛应用于文化建筑。\n\n在北京，很多历史景点的匾额都由著名书法家题写，这不仅提升了文化价值，也体现了传统书法艺术的延续。\n\n匾额不仅是标识，也是文化的一部分。通过书写者的身份，可以判断其文化地位。\n\n因此，这道题考查的不只是名字，还涉及文化艺术与城市景观的结合。\n\n记忆点：荷花市场匾额是启功题写。",
+    "type": "single"
+  },
+  {
+    "id": 83,
+    "question": "北京传统商业街形成的主要原因是什么？",
+    "options": [
+      "A 政府规定",
+      "B 水陆交通便利",
+      "C 随机形成",
+      "D 农业发展"
+    ],
+    "answer": "B",
+    "explanation": "北京很多传统商业街的形成，与交通条件密切相关。特别是在古代，水运和道路运输是最重要的物流方式。\n\n例如什刹海一带，因为靠近水运通道，货物可以通过船只运入城市，因此逐渐形成商业聚集区。\n\n商人通常会选择交通便利、人流集中的地方经营，这样更容易获得顾客。\n\n因此，商业街的形成并不是随机的，而是由交通条件决定的。\n\n记忆点：商业街跟着交通走。",
+    "type": "single"
+  },
+  {
+    "id": 84,
+    "question": "中轴线周边为什么容易形成商业区？",
+    "options": [
+      "A 风景好",
+      "B 人流集中",
+      "C 政府要求",
+      "D 建筑多"
+    ],
+    "answer": "B",
+    "explanation": "中轴线本身是政治和礼仪空间，但其周边区域往往人流集中，因此容易形成商业区。\n\n人流越多，商业机会越大。比如前门附近，由于靠近中轴线和城门，是人员进出的重要通道，自然发展成为商业中心。\n\n这种现象说明，商业发展往往依赖人流，而人流又与城市结构密切相关。\n\n因此，中轴线虽然不直接用于商业，但会影响商业分布。\n\n记忆点：人多的地方才有商业。",
+    "type": "single"
+  },
+  {
+    "id": 85,
+    "question": "北京中轴线申遗成功的关键因素是什么？",
+    "options": [
+      "A 建筑多",
+      "B 历史完整与连续",
+      "C 面积大",
+      "D 人口多"
+    ],
+    "answer": "B",
+    "explanation": "北京中轴线能够申遗成功，最关键的原因是其历史结构完整，并且长期保持连续。\n\n从元代到明清，再到现代，中轴线的基本形态一直存在，没有被完全破坏。\n\n这种连续性非常重要，因为世界遗产强调“真实性”和“完整性”。\n\n同时，中轴线不仅包含建筑，还包含城市规划思想，是一个整体系统。\n\n因此，它的价值不仅在于“有多少建筑”，而在于“结构是否完整”。\n\n记忆点：申遗关键是完整与连续。",
+    "type": "single"
+  },
+  {
+    "id": 86,
+    "question": "中轴线为什么被称为“城市的脊梁”？",
+    "options": [
+      "A 因为高",
+      "B 因为长",
+      "C 因为决定结构",
+      "D 因为古老"
+    ],
+    "answer": "C",
+    "explanation": "中轴线被称为“城市的脊梁”，是因为它决定了城市的整体结构。就像人体的脊柱一样，它支撑并组织整个系统。\n\n在北京，中轴线把最重要的建筑连接起来，使城市布局清晰有序。\n\n如果没有这条轴线，城市可能会变得分散、缺乏中心。\n\n因此，这个比喻强调的是“结构作用”，而不是外形特征。\n\n记忆点：中轴线=城市骨架。",
+    "type": "single"
+  },
+  {
+    "id": 87,
+    "question": "北京中轴线体现了哪种空间特点？",
+    "options": [
+      "A 分散",
+      "B 对称",
+      "C 随机",
+      "D 弯曲"
+    ],
+    "answer": "B",
+    "explanation": "中轴线最重要的空间特点是对称。轴线两侧的建筑在布局上保持平衡。\n\n这种对称不仅让城市整齐，还体现了秩序和稳定。\n\n在古代文化中，对称被认为是合理和理想的状态。\n\n因此，对称既是设计方法，也是文化表达。\n\n记忆点：中轴线强调对称。",
+    "type": "single"
+  },
+  {
+    "id": 88,
+    "question": "中轴线上的建筑为什么逐级展开？",
+    "options": [
+      "A 随机",
+      "B 方便建造",
+      "C 表现等级递减",
+      "D 节省空间"
+    ],
+    "answer": "C",
+    "explanation": "中轴线上的建筑从中心向外逐级展开，是为了表现等级递减的关系。\n\n最核心的紫禁城等级最高，越往外，建筑的重要性逐渐降低。\n\n这种结构让人可以通过位置判断地位，是一种非常直观的表达方式。\n\n因此，空间排列实际上是在“展示社会结构”。\n\n记忆点：从中心向外，等级递减。",
+    "type": "single"
+  },
+  {
+    "id": 89,
+    "question": "什刹海荷花市场牌楼匾额是谁题写的？",
+    "options": [
+      "A 启功",
+      "B 郭沫若",
+      "C 齐白石",
+      "D 徐悲鸿"
+    ],
+    "answer": "A",
+    "explanation": "什刹海荷花市场牌楼上的匾额由启功题写。启功是中国著名的书法家和学者，其书法风格规范、优雅。\n\n在北京，很多历史文化景点都会邀请著名书法家题字，这不仅是装饰，也是一种文化传承。\n\n通过匾额，可以把现代文化与历史空间结合起来。\n\n因此，这道题体现的是文化艺术在城市中的作用。\n\n记忆点：牌楼匾额看启功。",
+    "type": "single"
+  },
+  {
+    "id": 90,
+    "question": "北京酱园流派中，下面哪一个属于老酱园流派？",
+    "options": [
+      "A 六必居酱园",
+      "B 天源酱园",
+      "C 桂馨斋酱园",
+      "D 天义顺酱园"
+    ],
+    "answer": "A",
+    "explanation": "六必居是北京最有代表性的老酱园之一，也常被看作老酱园流派的重要代表。所谓“酱园”，就是制作和售卖酱菜、酱料、酱油等食品的老字号店铺。在过去，没有冰箱和现代加工方式，酱菜和酱料是北京人日常生活里非常重要的食物。\n\n六必居之所以重要，不只是因为它历史久，还因为它代表了北京本地饮食文化中的“保存食物”和“调味习惯”。古代城市人口很多，物资运输也不像今天这么方便，因此能够久存、便于配饭的酱菜特别受欢迎。\n\n从城市文化来看，酱园不属于宫殿、城门那样的政治空间，但它能反映老北京的日常生活。中轴线讲的是国家秩序，酱园讲的是百姓日子，两者加在一起，才是完整的北京历史。\n\n记忆点：老酱园里，最典型的是六必居。",
+    "type": "single"
+  },
+  {
+    "id": 91,
+    "question": "北京酱园流派中，下面哪一个属于京酱园流派？",
+    "options": [
+      "A 六必居酱园",
+      "B 天源酱园",
+      "C 桂馨斋酱园",
+      "D 天义顺酱园"
+    ],
+    "answer": "B",
+    "explanation": "天源酱园通常被归入京酱园流派。这里的“京”，指的是北京本地形成的酱园传统。它代表的是北京这座城市在长期发展中形成的饮食口味和制作习惯。\n\n北京是都城，人口来源很复杂，既有皇城文化，也有普通百姓的生活方式，因此吃的东西既讲究，又讲实用。酱园就是这种城市生活的一个缩影。天源酱园之所以能成为一个流派代表，是因为它在长期经营中形成了比较稳定的风味和经营方式，能够体现“北京本地”的特点。\n\n这类题的意义，不只是分辨一个店名，而是让人明白：老北京文化不只是看宫殿和中轴线，也要看厨房、饭桌和街巷里的味道。一个城市真正的历史，不只是大建筑，也包括普通人每天吃什么、怎么吃。\n\n记忆点：京酱园代表，看天源酱园。",
+    "type": "single"
+  },
+  {
+    "id": 92,
+    "question": "北京酱园流派中，下面哪一个属于南酱园流派？",
+    "options": [
+      "A 六必居酱园",
+      "B 天源酱园",
+      "C 桂馨斋酱园",
+      "D 天义顺酱园"
+    ],
+    "answer": "C",
+    "explanation": "桂馨斋酱园通常被归入南酱园流派。这里的“南”，不是说它在北京城南边，而是说它在风味和经营传统上，带有南方酱园文化的影响。\n\n北京作为都城，不只是北方文化的中心，也不断吸收全国各地的饮食习惯。很多老字号看起来是“北京品牌”，其实背后常常融合了不同地区的做法。南酱园流派的存在，就说明北京不是封闭的城市，而是一个能够吸收外来文化、再把它变成自己特色的大城市。\n\n从这一点看，酱园流派的区分，不只是饮食分类，也是在看一座城市的文化来源。中轴线体现的是都城秩序，而酱园流派体现的是城市生活中的交流与融合。一个是“国家层面”的北京，一个是“市井层面”的北京。\n\n记忆点：南酱园流派，代表是桂馨斋。",
+    "type": "single"
+  },
+  {
+    "id": 93,
+    "question": "具有“洋血统”的北京老字号是哪个？",
+    "options": [
+      "A 百年义利",
+      "B 锦芳",
+      "C 二友居",
+      "D 溢鑫府"
+    ],
+    "answer": "A",
+    "explanation": "百年义利被称为具有“洋血统”的北京老字号，意思不是它“不属于北京”，而是说它最初的发展背景中带有外国经营和近代工业化的影响。后来它在北京扎根，逐渐成为人们熟悉的本地品牌。\n\n这道题很有意思，因为它告诉我们：北京的城市文化不是完全封闭的。到了近代，北京虽然仍然保留很多传统老字号，但也开始接触来自国外的商业方式、生产方式和食品工业。百年义利就是这种“传统北京”和“近代变化”结合的代表。\n\n所以，这个品牌的重要性不只在于卖什么食品，而在于它反映了北京从古代都城向近代城市转变的过程。通过一道老字号题，其实也能看到城市历史不是静止不变的，而是在不断吸收、变化和重新形成自己的风格。\n\n记忆点：有“洋血统”的老字号，是百年义利。",
+    "type": "single"
+  },
+  {
+    "id": 94,
+    "question": "下面哪一项最能说明北京老字号在城市历史中的意义？",
+    "options": [
+      "A 只是卖东西",
+      "B 只是招牌老",
+      "C 既是商业品牌，也是城市记忆",
+      "D 只是游客景点"
+    ],
+    "answer": "C",
+    "explanation": "北京老字号的重要意义，不只是“卖东西卖得久”，而是它们同时保存了城市生活的记忆。一个老字号能够存在很多年，说明它不只是有商品，还能反映一代又一代北京人的生活习惯、口味和消费方式。\n\n比如酱园、点心铺、饭庄、烤鸭店，这些地方表面上是做买卖，实际上记录的是这座城市怎么吃饭、怎么待客、怎么过节。它们和中轴线上的宫殿、坛庙不一样，后者主要体现国家制度和礼仪；而老字号体现的是普通人的生活世界。\n\n所以，真正理解北京历史，不能只看“大历史”，也要看“小生活”。老字号之所以重要，是因为它把商业、日常生活和城市记忆连在了一起。它们不是简单的商店，而是北京文化的一部分。\n\n记忆点：老字号不仅是生意，更是城市记忆。",
+    "type": "single"
+  },
+  {
+    "id": 95,
+    "question": "请根据下面线索描述，猜出这是什么建筑？",
+    "options": [
+      "A 钟楼",
+      "B 鼓楼",
+      "C 万宁桥",
+      "D 天安门"
+    ],
+    "answer": "A",
+    "explanation": "第一条线索：整体为砖石结构，墩台与上层楼阁相通。\n\n这一条首先告诉我们，它不是桥，也不是单纯的城门，而是一种“高台之上再起楼阁”的大型楼式建筑。万宁桥可以立刻排除，因为桥梁不可能是这种“墩台加楼阁”的组合。天安门虽然也有城台和城楼，但它首先是皇城正门，功能重点在礼仪和出入，不是单纯的楼式城市管理设施。此时，范围已经大体缩小到钟楼、鼓楼这一类北端高台楼阁建筑。\n\n第二条线索：重檐歇山顶，黑色琉璃瓦，绿琉璃剪边。\n\n这一步开始出现强辨识度。北京中轴线上的高等级皇家建筑，常见黄瓦、蓝瓦，但钟楼的一个鲜明特点正是黑色琉璃瓦配绿剪边。这种色彩组合不是中轴线上随处可见的常规配置，而是钟楼最容易被建筑史识别出来的外观特征之一。如果熟悉北京古建筑，到这一条其实已经可以做出较有把握的判断。\n\n第三条线索：什刹海东北岸，明永乐十八年，后为清代重建。\n\n这一条把“建筑形制判断”推进到“地理位置判断”。什刹海东北岸，正是钟楼所在区域。鼓楼虽然和钟楼很近，但它在钟楼南侧，并不完全对应“东北岸”这个位置描述。再加上永乐十八年这一时间点，与北京都城核心建筑群建设高峰吻合，说明它属于明代北京都城体系的一部分，而不是后来附加的小建筑。\n\n第四条线索：悬挂大钟，用于报时。\n\n这一条是最终确认。鼓楼负责“鼓”，钟楼负责“钟”，两者共同构成明清北京的城市报时系统。这里明确写出“悬挂大钟”，就已经没有第二个答案了。更重要的是，这不是简单的建筑用途说明，而是在提醒我们：钟楼属于古代城市治理系统的一部分。时间的统一，是都城秩序的重要基础。谁控制时间，谁就在某种意义上控制城市节奏。\n\n总结：\n\n这道题的判断过程其实是“建筑形制 → 屋顶特征 → 城市位置 → 管理功能”的层层递进。答得越早，说明越熟悉北京古建筑体系；答到最后才能确认，也说明线索设计是有效的。\n\n记忆点：黑瓦绿边、什刹海东北岸、报时大钟，这三层信息合起来，只能是钟楼。",
+    "type": "clue",
+    "clues": [
+      "它整体为砖石结构，墩台与上层砖石楼阁相通。",
+      "它屋顶形式为重檐歇山顶，上覆黑色琉璃瓦，绿琉璃剪边。",
+      "位于什刹海东北岸，始建于明永乐十八年，后屡遭火灾，现存建筑为清代重建。",
+      "是明清时期城市管理设施，悬挂明永乐年间铸造的大钟用于报时。"
+    ]
+  },
+  {
+    "id": 96,
+    "question": "请根据下面线索描述，猜出这是中轴线哪处景点？",
+    "options": [
+      "A 正阳门",
+      "B 万宁桥",
+      "C 永定门",
+      "D 先农坛"
+    ],
+    "answer": "B",
+    "explanation": "第一条线索：位置功能7个世纪未变，是中轴线重叠关系的重要实证。\n\n这一条一开始就把题目抬到了“城市历史连续性”的层面。它不是在问一座普通桥，而是在问：哪一个地方能证明元、明、清直到今天，北京城市骨架有连续延续？这种“位置和功能都长期不变”的节点非常少。正阳门和永定门虽然也重要，但它们经历过拆除、改造和交通体系变化，功能形态并不如这条线索所强调的那样连续。先农坛则更是礼仪空间，不承担这种“位置功能不变”的交通节点角色。\n\n第二条线索：地安门外大街中部、什刹海东岸、镇水兽趴蝮。\n\n这一条把范围进一步缩到桥梁和水利设施。尤其“趴蝮”是极有辨识度的线索。趴蝮是镇水兽，不会随便出现在城门、坛庙一类建筑中，而是与桥梁、水边设施、水利工程关系密切。到这一层，其实已经可以判断：答案一定是一座和水密切相关的桥，而且是北京非常著名的古桥。\n\n第三条线索：南北交通功能 + 玉带河进入什刹海的重要门户。\n\n这一条说明它不是一座只供人过河的小桥，而是水路交通体系中的“门口”。古代北京的都城运行，并不只靠陆路，很多物资和粮食运输依赖水系。玉带河通向什刹海，而什刹海又与北京的城市生活、漕运和空间格局关系密切，所以这座桥实际上兼有“桥梁+交通节点+水运门户”三重身份。\n\n第四条线索：木桥改石桥，设澄清闸调节水位。\n\n到这里，答案被彻底锁定为万宁桥。因为这一条不仅说明它是桥，还说明它不是普通桥梁，而是带有闸门功能的复合型水利工程。也就是说，万宁桥的价值不在于“老”，而在于它体现了古代北京如何把桥梁、河道、水位控制和交通运输整合到同一个城市节点之中。\n\n总结：\n\n这道题真正考的不是“你知不知道万宁桥名字”，而是“你能不能看懂北京城是怎样靠桥和水系维持运行的”。万宁桥之所以重要，不只是因为它在中轴线附近，而是因为它证明了北京这座都城既是礼仪都城，也是依靠复杂交通水系运转的真实城市。\n\n记忆点：趴蝮、什刹海、水闸、水运门户，这四层信息叠在一起，就是万宁桥。",
+    "type": "clue",
+    "clues": [
+      "其位置功能历经7个世纪始终未变，是元大都、明、清与当代北京城中轴线重叠关系的重要实证。",
+      "位于地安门外大街中部，什刹海东岸，驳岸上设镇水兽趴蝮。",
+      "承担南北交通功能，是玉带河水系进入什刹海的重要门户。",
+      "初为木桥，后改为石桥，桥西设澄清闸以调节水位供船只通行。"
+    ]
+  },
+  {
+    "id": 97,
+    "question": "请根据下面线索描述，猜出这是中轴线哪处景点？",
+    "options": [
+      "A 天坛",
+      "B 万宁桥",
+      "C 永定门",
+      "D 景山"
+    ],
+    "answer": "C",
+    "explanation": "第一条线索：明清防御体系、城市管理设施、皇家礼仪传统的重要组成部分。\n\n这一条先告诉我们，它是一座“城门性质”的建筑，而不是祭坛、桥梁或山体景观。天坛和景山可以先排除，因为它们都不属于防御体系。万宁桥虽然也和城市交通有关，但不是“防御体系”的核心设施。这里已经把判断范围压缩到城门类建筑。\n\n第二条线索：20世纪50年代拆除，2005年重建。\n\n这一条非常关键，因为北京历史建筑中“被拆后又按保护原则重建”的代表性案例并不多。能满足这一点，又在中轴线体系里具有重要地位的，永定门是最典型的答案。此时其实已经接近确认，但还需要后面线索进一步验证。\n\n第三条线索：外城七门中规制最高，外城正南门。\n\n这一步基本可以锁定。北京外城城门里，正南门就是永定门，而且它在规制和位置上都具有代表性。所谓“规制最高”，不是说它最大最漂亮这么简单，而是它在等级制度和都城礼仪体系中的地位更高。城门在古代并不只是交通口，而是国家空间秩序的一部分。外城正南门的地位，决定了它必然不是普通门户。\n\n第四条线索：传统中轴线南段起点。\n\n这就是最后的确认条件。北京中轴线向南延伸时，永定门正是传统意义上的起点。也就是说，它不仅是城门，还是整条都城中轴南端展开的标志点。它把“交通、防御、礼仪、城市边界”这些不同功能汇集在一个建筑上。\n\n总结：\n\n这道题真正要你看懂的是：永定门的重要性，并不只是“它在南边”，而是它把外城边界、都城礼仪和中轴线空间逻辑合在了一起。它既是门，也是秩序的起点。现代重建它，意义也不仅是恢复一座建筑，而是恢复北京中轴线在空间上的完整性。\n\n记忆点：外城正南门、拆后重建、中轴南起点，这三条合起来就是永定门。",
+    "type": "clue",
+    "clues": [
+      "是明清两代城市防御体系和城市管理设施、皇家礼仪传统的重要组成部分。",
+      "原建筑于20世纪50年代拆除，现为2005年严格遵守中国文物保护原则重建完成的地标性建筑。",
+      "是明清时期北京外城七座城门中规制最高的，是北京老城外城正南门。",
+      "是传统中轴线南段的起点。"
+    ]
+  },
+  {
+    "id": 98,
+    "question": "请根据下面线索描述，猜出这是中轴线哪处景点？",
+    "options": [
+      "A 先农坛",
+      "B 天坛",
+      "C 正阳门",
+      "D 社稷坛"
+    ],
+    "answer": "A",
+    "explanation": "第一条线索：外城西南隅，分内坛、外坛。\n\n这条线索先限定了空间位置和建筑类型。它不在中轴线正线上，而是在外城西南区域；同时“内坛、外坛”的说法，说明它属于坛庙体系，而不是城门或桥梁。这样一来，正阳门可以先排除，范围大体缩到先农坛、天坛、社稷坛这一类祭祀空间。\n\n第二条线索：始建于明永乐十八年，1915年外坛北侧开放为公园。\n\n这一条开始把历史过程带进来。先农坛和天坛都与明代都城建设有关，但“外坛北侧作为公园对外开放”这一点，更符合先农坛后期利用变化的历史路径。它提醒我们：一个礼仪空间在近代以后可能发生了功能转换，从皇家祭祀场所转变成公众城市空间。\n\n第三条线索：祭祀炎帝神农氏和太岁月将。\n\n这一步基本已经锁定答案。神农氏直接对应农业文明，说明这个坛庙与“农”有关，而不是祭天、祭地、祭祖。社稷坛虽然也和土地、粮食有关，但它祭的是社神和稷神，不是神农氏。到这里，先农坛几乎已经可以确定。\n\n第四条线索：观耕台、“一亩三分地”、亲耕礼。\n\n这是最终确认条件。皇帝在观耕台旁象征性耕种“一亩三分地”，正是先农坛最具代表性的礼仪内容。它所体现的，并不是皇帝真的要下地种田，而是国家用仪式公开表达“农业是立国基础”这一政治观念。\n\n总结：\n\n这道题真正的深层意义在于：先农坛不是简单的“农业纪念地”，而是国家通过礼仪把农业提升为政治基础的场所。它说明古代王朝治理天下，不只是靠军队和官员，也要不断强调“重农”的正当性。\n\n记忆点：神农氏、亲耕礼、一亩三分地，这三组信息合起来，就是先农坛。",
+    "type": "clue",
+    "clues": [
+      "位于北京老城外城西南隅，分内坛、外坛。",
+      "始建于明永乐十八年，1915年外坛北侧作为公园对外开放。",
+      "是明清两代重要的祭祀场地之一，祭祀对象为炎帝神农氏和太岁月将。",
+      "其中观耕台是皇帝的“一亩三分地”，皇帝执行亲耕礼的场地。"
+    ]
+  },
+  {
+    "id": 99,
+    "question": "请根据下面线索描述，猜出这是中轴线哪处景点？",
+    "options": [
+      "A 先农坛",
+      "B 天坛",
+      "C 太庙",
+      "D 景山"
+    ],
+    "answer": "B",
+    "explanation": "第一条线索：内坛外坛、北圆南方、天圆地方。\n\n这一条一开始就把题目带进了中国古代宇宙观。不是所有坛庙都具有如此鲜明的“天圆地方”表达。北圆南方的坛墙格局，本身就强烈暗示这是与“天”有关的祭祀建筑，而不是一般祖庙或园林景观。到这一层，太庙和景山已经基本可以排除。\n\n第二条线索：明永乐十八年始建，1918年辟为公园。\n\n这条线索把它放进了北京明代都城建设的大背景中，同时也点出了近代功能转变。一个皇家祭祀空间后来变成公众公园，这种变化说明中国从皇权社会走向现代社会之后，很多“专属皇家的空间”逐渐公共化了。\n\n第三条线索：祭天、祈谷。\n\n这一步已经几乎没有悬念。明清皇帝专门祭天、祈求丰收的地方，就是天坛。先农坛虽然也与农业有关，但重点是亲耕和祭先农，不是“祭天”。因此，这里已经能够明确锁定答案。\n\n第四条线索：祈年殿、蓝色琉璃瓦、天上宫阙。\n\n这是最终确认，也是最具建筑辨识度的一条。祈年殿是天坛最有代表性的建筑，而蓝色琉璃瓦在北京重要皇家建筑中非常特别，因为它直接用色彩来象征天空。这一条不仅是在告诉你“答案是什么”，也是在提醒你：天坛不是随便修出来的，它从平面布局到建筑颜色，都在表现古代人对天地秩序的理解。\n\n总结：\n\n这道题的深层价值在于，它让人看到一处建筑如何把宇宙观、皇权礼仪和农业政治结合到一起。天坛不是单纯的祭祀场所，而是古代国家通过仪式向“天命”和“天下”寻求合法性的地方。\n\n记忆点：天圆地方、祭天祈谷、祈年殿蓝瓦，这三层信息一起，答案就是天坛。",
+    "type": "clue",
+    "clues": [
+      "它由内坛、外坛两部分组成，两重坛墙转角均呈现北圆南方的特点，象征“天圆地方”的宇宙观。",
+      "始建于明永乐十八年，1912年以后不再作为皇家祭祀建筑使用，1918年被辟为公园。",
+      "是明清两代皇帝祭天、祈谷的祭祀空间。",
+      "其中祈年殿建筑设计旨在塑造天上宫阙的独特体验，多重蓝色琉璃瓦屋顶象征天际之意。"
+    ]
+  },
+  {
+    "id": 100,
+    "question": "请根据下面线索描述，猜出这是中轴线哪处景点？",
+    "options": [
+      "A 正阳门",
+      "B 天安门",
+      "C 永定门",
+      "D 钟楼"
+    ],
+    "answer": "B",
+    "explanation": "第一条线索：金凤颁诏、金殿传胪等仪式。\n\n这一条已经把答案引向皇城正门一类的高级礼仪空间。所谓“金凤颁诏”“金殿传胪”，都属于明清时期皇权公开展示的重要典礼，不可能发生在普通城门、桥梁或报时楼上。这说明答案一定是与国家礼仪高度相关的建筑。\n\n第二条线索：明清皇城正门，前导性礼仪建筑序列的一部分。\n\n到这里，范围已经极小。北京城中能称为“皇城正门”的建筑，最典型的就是天安门。正阳门虽然也极其重要，但它是内城正南门，不是皇城正门。永定门则是外城城门，更不符合这条线索。因此，第二条其实已经把答案基本锁死。\n\n第三条线索：城台加城楼，五个券门，自中向侧递减。\n\n这一条是建筑形制确认。五个券门的城台结构，是天安门极强的辨识特征。它说明这不仅是一座礼仪之门，也是一套经过精细设计的政治建筑：中央最大、两侧递减，这种秩序感本身就是等级制度的空间表现。\n\n第四条线索：黄琉璃瓦，开国大典。\n\n这一步是最终确认，也把古代与现代连接起来。黄色琉璃瓦说明它属于皇家最高等级建筑序列，而1949年开国大典又让天安门从明清皇城正门，转变为现代中国国家象征。也就是说，它不是只属于一个朝代，而是跨越时代、不断被赋予新政治意义的建筑。\n\n总结：\n\n天安门之所以重要，不只是“有名”，而是因为它在不同时代都承担了“国家权力公开呈现”的作用：明清时是皇权礼仪的前台，新中国成立后则成为国家形象最集中的象征空间。这正是中轴线建筑最深的特点——它们既是建筑，也是政治语言。\n\n记忆点：皇城正门、五券门、开国大典，这三层线索一起，答案只能是天安门。",
+    "type": "clue",
+    "clues": [
+      "始建于明永乐十五年，1988年对外开放，是金凤颁诏、金殿传胪等仪式活动的举办地。",
+      "是明清两代皇城正门，是为进出宫城的前导性礼仪建筑序列与朝堂空间组成部分。",
+      "它坐北朝南，由城台和城楼两部分组成，城台下设券门五阙，左右对称，券门尺寸自中央向两侧依次减少。",
+      "城楼重檐歇山顶，覆盖黄色琉璃瓦。1949年10月1日开国大典以及阅兵仪式在此举行。"
+    ]
+  }
+];
+
+    function normalizeOption(optionText) {
+      const text = typeof optionText === 'string' ? optionText.trim() : '';
+      const match = text.match(/^([A-D])[\s、.．:：\-]*(.+)$/);
+      if (!match) return null;
+      return { key: match[1], text: match[2].trim() };
+    }
+
+    function normalizeQuestion(question) {
+      const options = (Array.isArray(question.options) ? question.options : [])
+        .map(normalizeOption)
+        .filter(Boolean);
+      const answer = typeof question.answer === 'string' ? question.answer.trim().toUpperCase() : '';
+      const answerOption = options.find((option) => option.key === answer);
+      return {
+        id: Number(question.id),
+        displayNo: String(question.id),
+        question: typeof question.question === 'string' ? question.question.trim() : '',
+        options,
+        answer,
+        answerText: answerOption ? answerOption.text : answer,
+        explanation: typeof question.explanation === 'string' ? question.explanation.trim() : '',
+        type: question.type === 'clue' ? 'clue' : 'single',
+        clues: Array.isArray(question.clues) ? question.clues.map((clue) => String(clue).trim()).filter(Boolean) : []
+      };
+    }
+
+    const QUESTION_BANK = RAW_QUESTION_BANK.map(normalizeQuestion);
+
+    const state = {
+      questions: QUESTION_BANK,
+      view: 'home',
+      countChoice: '10',
+      voiceEnabled: loadStoredBoolean(STORAGE_KEYS.voiceEnabled, true),
+      totalStars: loadStoredNumber(STORAGE_KEYS.totalStars, 0),
+      wrongBook: loadWrongBook(),
+      notice: '',
+      noticeTone: 'info',
+      session: null,
+      speech: {
+        available: typeof window !== 'undefined' && 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window,
+        unlocked: false,
+        voice: null,
+        warned: false
+      }
+    };
+
+    const app = document.getElementById('app');
+
+    function loadStoredBoolean(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (raw === null) return fallback;
+        return raw === 'true';
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function loadStoredNumber(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        const value = Number(raw);
+        return Number.isFinite(value) ? value : fallback;
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function loadWrongBook() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.wrongBook);
+        if (!raw) return {};
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === 'object' ? parsed : {};
+      } catch (error) {
+        return {};
+      }
+    }
+
+    function saveWrongBook() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.wrongBook, JSON.stringify(state.wrongBook));
+      } catch (error) {}
+    }
+
+    function saveVoiceEnabled() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.voiceEnabled, String(state.voiceEnabled));
+      } catch (error) {}
+    }
+
+    function saveTotalStars() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.totalStars, String(state.totalStars));
+      } catch (error) {}
+    }
+
+    function setNotice(message, tone) {
+      state.notice = message || '';
+      state.noticeTone = tone || 'info';
+      render();
+      if (message) {
+        const currentMessage = message;
+        window.clearTimeout(setNotice._timer);
+        setNotice._timer = window.setTimeout(() => {
+          if (state.notice === currentMessage) {
+            state.notice = '';
+            render();
+          }
+        }, 3000);
+      }
+    }
+
+    function shuffle(array) {
+      const copy = array.slice();
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        const temp = copy[index];
+        copy[index] = copy[randomIndex];
+        copy[randomIndex] = temp;
+      }
+      return copy;
+    }
+
+    function getWrongQuestions() {
+      const wrongIds = new Set(Object.keys(state.wrongBook));
+      return state.questions.filter((question) => wrongIds.has(String(question.id)));
+    }
+
+    function getSelectedCount(listLength) {
+      if (state.countChoice === 'all') return listLength;
+      return Math.min(listLength, Number(state.countChoice));
+    }
+
+    function unlockSpeech() {
+      if (!state.speech.available || state.speech.unlocked) return;
+      try {
+        const utterance = new SpeechSynthesisUtterance(' ');
+        utterance.volume = 0;
+        speechSynthesis.speak(utterance);
+        speechSynthesis.cancel();
+      } catch (error) {}
+      state.speech.unlocked = true;
+    }
+
+    function pickVoice() {
+      if (!state.speech.available) return null;
+      const voices = speechSynthesis.getVoices();
+      if (!voices || !voices.length) return null;
+      const zhVoices = voices.filter((voice) => /zh|cmn/i.test(voice.lang) || /中文|普通话|国语|Chinese|Mandarin/i.test(voice.name + ' ' + voice.voiceURI));
+      const femaleHint = /female|woman|girl|女|xiaoxiao|xiaoyi|xiaohan|xiaomeng|xiaoqiu|tingting|hanhan|huihui|meijia|sin-ji/i;
+      const femaleVoice = zhVoices.find((voice) => femaleHint.test(voice.name + ' ' + voice.voiceURI));
+      state.speech.voice = femaleVoice || zhVoices[0] || voices[0] || null;
+      return state.speech.voice;
+    }
+
+    function stopSpeech() {
+      if (!state.speech.available) return;
+      try {
+        speechSynthesis.cancel();
+      } catch (error) {}
+    }
+
+    function getExplanationText(question) {
+      const explanation = question && typeof question.explanation === 'string' ? question.explanation.trim() : '';
+      return explanation || '本题讲解待补充';
+    }
+
+    function getRevealedClueCount(question) {
+      if (!question || question.type !== 'clue' || !Array.isArray(question.clues) || !question.clues.length || !state.session) {
+        return 0;
+      }
+      const stored = state.session.clueProgress ? state.session.clueProgress[question.id] : undefined;
+      const count = Number.isFinite(stored) ? stored : 1;
+      return Math.min(question.clues.length, Math.max(1, count));
+    }
+
+    function getVisibleClues(question, revealAll) {
+      if (!question || !Array.isArray(question.clues) || !question.clues.length) return [];
+      if (revealAll || question.type !== 'clue' || !state.session) return question.clues;
+      return question.clues.slice(0, getRevealedClueCount(question));
+    }
+
+    function canRevealNextClue(question) {
+      if (!question || question.type !== 'clue' || !Array.isArray(question.clues) || !question.clues.length || !state.session) {
+        return false;
+      }
+      if (state.session.answers[question.id]) return false;
+      return getRevealedClueCount(question) < question.clues.length;
+    }
+
+    function speakText(text) {
+      if (!state.voiceEnabled) return;
+      if (!state.speech.available) {
+        if (!state.speech.warned) {
+          state.speech.warned = true;
+          setNotice('当前设备语音不可用，但不影响答题。', 'warning');
+        }
+        return;
+      }
+      if (!state.speech.unlocked) return;
+      stopSpeech();
+      const voice = pickVoice();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = voice && voice.lang ? voice.lang : 'zh-CN';
+      utterance.voice = voice || null;
+      utterance.rate = 0.93;
+      utterance.pitch = 1.04;
+      utterance.volume = 1;
+      speechSynthesis.speak(utterance);
+    }
+
+    function getQuestionSpeechText(question, withExplanation) {
+      const revealAllClues = withExplanation || Boolean(state.session && state.session.answers && state.session.answers[question.id]);
+      const visibleClues = getVisibleClues(question, revealAllClues);
+      const parts = [
+        '第' + question.displayNo + '题。',
+        question.question
+      ];
+      if (visibleClues.length) {
+        parts.push('线索。');
+        visibleClues.forEach((clue, index) => {
+          parts.push('第' + (index + 1) + '条，' + clue);
+        });
+      }
+      if (Array.isArray(question.options) && question.options.length) {
+        parts.push('选项。');
+        question.options.forEach((option) => {
+          parts.push(option.key + '，' + option.text);
+        });
+      }
+      if (withExplanation) {
+        parts.push('正确答案是' + question.answerText + '。');
+        parts.push(getExplanationText(question));
+      }
+      return parts.join('');
+    }
+
+    function startSession(mode) {
+      unlockSpeech();
+      const sourceList = mode === 'wrong' ? getWrongQuestions() : state.questions.slice();
+      if (!sourceList.length) {
+        setNotice('错题本还是空的，我们先去顺序练习吧。', 'warning');
+        return;
+      }
+
+      let workingList = sourceList.slice();
+      if (mode === 'random') {
+        workingList = shuffle(workingList);
+      }
+
+      const pickCount = getSelectedCount(workingList.length);
+      const sessionQuestions = workingList.slice(0, pickCount);
+
+      if (!sessionQuestions.length) {
+        setNotice('这次没有可练习的题目，请换一个数量再试试。', 'warning');
+        return;
+      }
+
+      if (mode === 'wrong' && sessionQuestions.length < Number(state.countChoice || sessionQuestions.length) && state.countChoice !== 'all') {
+        setNotice('错题本里的题目还没有这么多，先把现有错题练一遍吧。', 'warning');
+      }
+
+      const clueProgress = {};
+      sessionQuestions.forEach((question) => {
+        if (question.type === 'clue' && Array.isArray(question.clues) && question.clues.length) {
+          clueProgress[question.id] = 1;
+        }
+      });
+
+      state.session = {
+        mode,
+        countChoice: state.countChoice,
+        questions: sessionQuestions,
+        currentIndex: 0,
+        answers: {},
+        clueProgress,
+        starsEarned: 0
+      };
+      state.view = 'quiz';
+      render();
+      queueQuestionSpeech(false);
+    }
+
+    function queueQuestionSpeech(withExplanation) {
+      const question = getCurrentQuestion();
+      if (!question) return;
+      window.setTimeout(() => {
+        speakText(getQuestionSpeechText(question, withExplanation));
+      }, 80);
+    }
+
+    function getCurrentQuestion() {
+      if (!state.session) return null;
+      return state.session.questions[state.session.currentIndex] || null;
+    }
+
+    function getCurrentAnswerRecord() {
+      const question = getCurrentQuestion();
+      if (!question || !state.session) return null;
+      return state.session.answers[question.id] || null;
+    }
+
+    function answerQuestion(optionKey) {
+      unlockSpeech();
+      const question = getCurrentQuestion();
+      if (!question || !state.session) return;
+      if (state.session.answers[question.id]) return;
+
+      const option = question.options.find((item) => item.key === optionKey);
+      if (!option) return;
+
+      const isCorrect = optionKey === question.answer;
+      state.session.answers[question.id] = {
+        selectedKey: optionKey,
+        selectedText: option.text,
+        correct: isCorrect
+      };
+
+      if (isCorrect) {
+        state.session.starsEarned += 1;
+        state.totalStars += 1;
+        saveTotalStars();
+      } else {
+        state.wrongBook[question.id] = {
+          id: question.id,
+          displayNo: question.displayNo,
+          question: question.question,
+          answerText: question.answerText,
+          savedAt: Date.now()
+        };
+        saveWrongBook();
+      }
+
+      render();
+    }
+
+    function revealNextClue() {
+      unlockSpeech();
+      const question = getCurrentQuestion();
+      if (!question || !state.session || !canRevealNextClue(question)) return;
+
+      const nextCount = getRevealedClueCount(question) + 1;
+      state.session.clueProgress[question.id] = nextCount;
+      render();
+      window.setTimeout(() => {
+        speakText('第' + nextCount + '条线索。' + question.clues[nextCount - 1]);
+      }, 80);
+    }
+
+    function goQuestion(step) {
+      if (!state.session) return;
+      stopSpeech();
+      const nextIndex = state.session.currentIndex + step;
+      if (nextIndex < 0 || nextIndex >= state.session.questions.length) return;
+      state.session.currentIndex = nextIndex;
+      render();
+      queueQuestionSpeech(false);
+    }
+
+    function showResult() {
+      stopSpeech();
+      state.view = 'result';
+      render();
+    }
+
+    function replaySpeech() {
+      unlockSpeech();
+      const question = getCurrentQuestion();
+      if (!question) return;
+      const answered = Boolean(getCurrentAnswerRecord());
+      speakText(getQuestionSpeechText(question, answered));
+    }
+
+    function countStats() {
+      if (!state.session) {
+        return { correct: 0, wrong: 0, answered: 0, total: 0, score: 0 };
+      }
+      const records = Object.values(state.session.answers);
+      const correct = records.filter((record) => record.correct).length;
+      const wrong = records.filter((record) => !record.correct).length;
+      const total = state.session.questions.length;
+      return {
+        correct,
+        wrong,
+        answered: records.length,
+        total,
+        score: total ? Math.round((correct / total) * 100) : 0
+      };
+    }
+
+    function getCheerText(score) {
+      if (score >= 95) return '你已经像一位小小讲解员啦，很多北京中轴线知识都被你稳稳记住了。';
+      if (score >= 80) return '今天发挥很棒，继续练一练，你会把这些历史故事讲得更顺。';
+      if (score >= 60) return '你已经记住了不少重点，再把错题故事看一遍，会更扎实。';
+      return '每做完一轮，脑海里的中轴线地图都会更清楚，慢慢来就很棒。';
+    }
+
+    function medalsFromStars(stars) {
+      return Math.floor(stars / 20);
+    }
+
+    function clearWrongBook() {
+      if (!Object.keys(state.wrongBook).length) {
+        setNotice('错题本现在是空的。', 'info');
+        return;
+      }
+      const sure = window.confirm('要清空错题本吗？');
+      if (!sure) return;
+      state.wrongBook = {};
+      saveWrongBook();
+      setNotice('错题本已经清空啦。', 'info');
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function renderNotice() {
+      if (!state.notice) return '';
+      const tone = state.noticeTone || 'info';
+      return '<div class="notice ' + tone + '">' + escapeHtml(state.notice) + '</div>';
+    }
+
+    function renderHome() {
+      const wrongCount = Object.keys(state.wrongBook).length;
+      return `
+        <section class="panel home-hero">
+          <h1 class="title">行中轴 知历史</h1>
+          <p class="subtitle">一年级知识闯关小工具</p>
+          <div class="hero-badges">
+            <div class="badge-card">
+              <div class="badge-label">累计星星</div>
+              <div class="badge-value">${state.totalStars}</div>
+            </div>
+            <div class="badge-card">
+              <div class="badge-label">小奖章</div>
+              <div class="badge-value">${medalsFromStars(state.totalStars)}</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel section">
+          <h2 class="section-title">选择练习数量</h2>
+          <div class="count-grid">
+            ${[
+              { value: '10', label: '10题' },
+              { value: '20', label: '20题' },
+              { value: 'all', label: '全部' }
+            ].map((item) => `
+              <button class="choice-chip ${state.countChoice === item.value ? 'active' : ''}" data-action="set-count" data-value="${item.value}">${item.label}</button>
+            `).join('')}
+          </div>
+        </section>
+
+        <section class="panel section">
+          <h2 class="section-title">语音开关</h2>
+          <div class="voice-grid">
+            <button class="choice-chip ${state.voiceEnabled ? 'active' : ''}" data-action="set-voice" data-value="on">开启语音</button>
+            <button class="choice-chip ${!state.voiceEnabled ? 'active' : ''}" data-action="set-voice" data-value="off">关闭语音</button>
+          </div>
+          <div class="tiny-note">${state.speech.available ? '轻点任意开始按钮后，题目就可以朗读啦。' : '当前设备语音不可用，但不影响答题。'}</div>
+        </section>
+
+        <section class="panel section">
+          <h2 class="section-title">开始练习</h2>
+          <div class="mode-grid">
+            <button class="mode-card" data-action="start" data-mode="order" data-tone="order">
+              <span class="mode-title">顺序练习</span>
+              <span class="mode-desc">按题库顺序慢慢闯关，适合第一次学习。</span>
+            </button>
+            <button class="mode-card" data-action="start" data-mode="random" data-tone="random">
+              <span class="mode-title">随机练习</span>
+              <span class="mode-desc">像抽卡一样答题，更有闯关感。</span>
+            </button>
+            <button class="mode-card" data-action="start" data-mode="wrong" data-tone="wrong" ${wrongCount ? '' : 'disabled'}>
+              <span class="mode-title">错题再练</span>
+              <span class="mode-desc">${wrongCount ? '把还没记牢的题再练一遍。' : '还没有错题，先去做几题吧。'}</span>
+            </button>
+          </div>
+          <div class="action-row">
+            <button class="small-button warning" data-action="clear-wrong">清空错题本</button>
+            <button class="small-button ghost" disabled>错题数量：${wrongCount}</button>
+          </div>
+          ${renderNotice()}
+        </section>
+      `;
+    }
+
+    function renderOptions(question, record) {
+      return question.options.map((option) => {
+        let className = 'option-button';
+        if (record) {
+          if (option.key === record.selectedKey) className += ' selected';
+          if (option.key === question.answer) className += ' correct';
+          if (option.key === record.selectedKey && option.key !== question.answer) className += ' wrong';
+        }
+
+        return `
+          <button class="${className}" data-action="answer" data-key="${option.key}" ${record ? 'disabled' : ''}>
+            <span class="option-key">${escapeHtml(option.key)}</span>
+            <span>${escapeHtml(option.text)}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderQuiz() {
+      const question = getCurrentQuestion();
+      if (!question) return '';
+      const record = getCurrentAnswerRecord();
+      const stats = countStats();
+      const progress = ((state.session.currentIndex + 1) / state.session.questions.length) * 100;
+      const lastQuestion = state.session.currentIndex === state.session.questions.length - 1;
+      const visibleClues = getVisibleClues(question, Boolean(record));
+      const feedbackTitle = record ? (record.correct ? '答对啦，真会观察！' : '这次先记住，也很棒！') : '';
+      const feedbackText = record
+        ? (record.correct
+            ? '你选中了正确答案，已经收下一颗闪闪的小星星。'
+            : '没关系，我们一起把正确答案和故事再看一遍，下次就更容易答对。')
+        : '';
+
+      return `
+        <section class="panel quiz-card">
+          <div class="quiz-top">
+            <div class="quiz-tag">第 ${escapeHtml(question.displayNo)} 题</div>
+            <div class="quiz-tag">进度 ${state.session.currentIndex + 1} / ${state.session.questions.length}</div>
+            <div class="quiz-tag">本轮星星 ${state.session.starsEarned}</div>
+          </div>
+          <div class="progress-track"><div class="progress-bar" style="width: ${progress}%"></div></div>
+          <h1 class="question-title">${escapeHtml(question.question)}</h1>
+          ${visibleClues.length ? `
+            <div class="clue-list">
+              ${visibleClues.map((clue, index) => `<div class="clue-item">线索${index + 1}：${escapeHtml(clue)}</div>`).join('')}
+            </div>
+          ` : ''}
+          ${question.type === 'clue' && Array.isArray(question.clues) && question.clues.length ? `
+            <div class="action-row">
+              <button class="small-button ghost" data-action="reveal-clue" ${canRevealNextClue(question) ? '' : 'disabled'}>显示下一条线索</button>
+              <button class="small-button ghost" disabled>已显示 ${visibleClues.length} / ${question.clues.length} 条线索</button>
+            </div>
+          ` : ''}
+          <div class="option-grid">${renderOptions(question, record)}</div>
+          ${record ? `
+            <div class="feedback-card ${record.correct ? 'good' : 'bad'}">
+              <div class="feedback-title">${feedbackTitle}</div>
+              <div>${feedbackText}</div>
+              <div class="feedback-answer">正确答案：${escapeHtml(question.answerText)}</div>
+              <div>${escapeHtml(getExplanationText(question))}</div>
+            </div>
+          ` : ''}
+          <div class="footer-actions full">
+            <button class="nav-button" data-action="prev" ${state.session.currentIndex === 0 ? 'disabled' : ''}>上一题</button>
+            <button class="nav-button ${record ? 'primary' : ''}" data-action="next" ${record ? '' : 'disabled'}>${lastQuestion ? '看成绩' : '下一题'}</button>
+            <button class="nav-button" data-action="replay" ${state.voiceEnabled && state.speech.available ? '' : 'disabled'}>再听一遍</button>
+            <button class="nav-button" data-action="stop-speech" ${state.speech.available ? '' : 'disabled'}>停止朗读</button>
+          </div>
+          <div class="tiny-note">${state.speech.available ? '如果开着语音，进入新题后会自动读题。' : '当前设备语音不可用，但不影响答题。'}</div>
+          ${renderNotice()}
+        </section>
+      `;
+    }
+
+    function renderResult() {
+      const stats = countStats();
+      return `
+        <section class="panel result-card">
+          <div class="quiz-top">
+            <div class="quiz-tag">总分 ${stats.score} 分</div>
+            <div class="quiz-tag">本轮星星 ${state.session ? state.session.starsEarned : 0}</div>
+          </div>
+          <div class="result-grid">
+            <div class="result-item">
+              <div class="result-label">答对题数</div>
+              <div class="result-value">${stats.correct}</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">答错题数</div>
+              <div class="result-value">${stats.wrong}</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">累计星星</div>
+              <div class="result-value">${state.totalStars}</div>
+            </div>
+            <div class="result-item">
+              <div class="result-label">错题本</div>
+              <div class="result-value">${Object.keys(state.wrongBook).length}</div>
+            </div>
+          </div>
+          <div class="result-cheer">${getCheerText(stats.score)}</div>
+          <div class="footer-actions">
+            <button class="nav-button primary" data-action="again">再来一次</button>
+            <button class="nav-button" data-action="wrong-again">只练错题</button>
+            <button class="nav-button" data-action="go-home">回到首页</button>
+          </div>
+          ${renderNotice()}
+        </section>
+      `;
+    }
+
+    function render() {
+      if (state.view === 'home') {
+        app.innerHTML = renderHome();
+      } else if (state.view === 'quiz') {
+        app.innerHTML = renderQuiz();
+      } else {
+        app.innerHTML = renderResult();
+      }
+    }
+
+    app.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-action]');
+      if (!button) return;
+      const action = button.dataset.action;
+      if (button.disabled) return;
+
+      switch (action) {
+        case 'set-count':
+          state.countChoice = button.dataset.value;
+          render();
+          break;
+        case 'set-voice':
+          state.voiceEnabled = button.dataset.value === 'on';
+          saveVoiceEnabled();
+          if (!state.voiceEnabled) stopSpeech();
+          render();
+          break;
+        case 'start':
+          startSession(button.dataset.mode);
+          break;
+        case 'clear-wrong':
+          clearWrongBook();
+          break;
+        case 'reveal-clue':
+          revealNextClue();
+          break;
+        case 'answer':
+          answerQuestion(button.dataset.key);
+          break;
+        case 'prev':
+          goQuestion(-1);
+          break;
+        case 'next':
+          if (!state.session) break;
+          if (state.session.currentIndex === state.session.questions.length - 1) {
+            showResult();
+          } else {
+            goQuestion(1);
+          }
+          break;
+        case 'replay':
+          replaySpeech();
+          break;
+        case 'stop-speech':
+          stopSpeech();
+          break;
+        case 'again':
+          if (!state.session) break;
+          startSession(state.session.mode);
+          break;
+        case 'wrong-again':
+          startSession('wrong');
+          break;
+        case 'go-home':
+          stopSpeech();
+          state.view = 'home';
+          render();
+          break;
+        default:
+          break;
+      }
+    });
+
+    document.addEventListener('pointerdown', unlockSpeech, { passive: true });
+    document.addEventListener('keydown', unlockSpeech, { passive: true });
+
+    if (state.speech.available) {
+      pickVoice();
+      window.speechSynthesis.addEventListener('voiceschanged', pickVoice);
+    }
+
+    window.addEventListener('beforeunload', stopSpeech);
+
+    render();
+  </script>
+</body>
+</html>
